@@ -1,26 +1,26 @@
 /* airiskguard site customizations */
 
 :root {
-  --md-primary-fg-color: #3f51b5;
+  --md-primary-fg-color: #0d8a72;
   --md-primary-bg-color: #ffffff;
-  --md-accent-fg-color: #651fff;
+  --md-accent-fg-color: #2196c4;
 }
 
 [data-md-color-scheme="slate"] {
-  --md-primary-fg-color: #5c6bc0;
-  --md-accent-fg-color: #7c4dff;
+  --md-primary-fg-color: #26a69a;
+  --md-accent-fg-color: #4fc3f7;
 }
 
 /* Homepage hero adjustments */
 .hero h1 {
-  background: linear-gradient(135deg, #3f51b5, #651fff);
+  background: linear-gradient(135deg, #1976b8, #2e9e5a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 [data-md-color-scheme="slate"] .hero h1 {
-  background: linear-gradient(135deg, #7986cb, #b388ff);
+  background: linear-gradient(135deg, #4fc3f7, #66bb6a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
