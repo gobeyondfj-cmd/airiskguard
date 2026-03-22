@@ -205,3 +205,48 @@ print(result.summary())
 [Install from PyPI](https://pypi.org/project/airiskguard/){ .md-button }
 
 </div>
+
+---
+
+<div class="section-title" markdown>
+
+## Services & Contact
+
+</div>
+
+Need help with AI risk governance? We offer consulting, implementation, training, and enterprise partnerships.
+
+<div class="features" markdown>
+
+<div class="feature-card" markdown>
+
+### Consulting
+
+AI risk assessments, regulatory readiness (EU AI Act, NIST, ISO 42001), framework design, and policy development.
+
+</div>
+
+<div class="feature-card" markdown>
+
+### Implementation
+
+Integration engineering, custom checker development, CI/CD pipeline setup, and dashboard configuration.
+
+</div>
+
+<div class="feature-card" markdown>
+
+### Enterprise & Partnerships
+
+Custom licensing, platform integrations, research collaboration, and team training programs.
+
+</div>
+
+</div>
+
+<div style="text-align: center; padding: 2rem 0;" markdown>
+
+[Get in Touch](services.md){ .md-button .md-button--primary }
+[support@airiskguard.ai](mailto:support@airiskguard.ai){ .md-button }
+
+</div>

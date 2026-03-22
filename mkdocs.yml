@@ -52,6 +52,7 @@ nav:
     - Framework Mapping: compliance/mapping.md
   - API Reference:
     - Standards API: api/standards.md
+  - Services & Contact: services.md
 
 plugins:
   - search
@@ -89,6 +90,8 @@ extra:
       link: https://github.com/gobeyondfj-cmd/airiskguard
     - icon: fontawesome/brands/python
       link: https://pypi.org/project/airiskguard/
+    - icon: fontawesome/solid/envelope
+      link: mailto:support@airiskguard.ai
   generator: false
 
 extra_css:
