@@ -8,6 +8,9 @@ hide:
 .md-content__button { display: none; }
 .hero { text-align: center; padding: 2rem 0 3rem; }
 .hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 0.5rem; }
+.hero h1 .headerlink, .hero h1 a.headerlink { display: none !important; }
+.hero h2 .headerlink, .hero h2 a.headerlink { display: none !important; }
+.section-title h2 .headerlink, .section-title h2 a.headerlink { display: none !important; }
 .hero .tagline { font-size: 1.3rem; color: var(--md-default-fg-color--light); margin-bottom: 2rem; }
 .hero .buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 .hero .buttons a {
