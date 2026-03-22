@@ -24,6 +24,7 @@ from airiskguard.integrations.decorator import risk_guard
 from airiskguard.storage.base import StorageBackend
 from airiskguard.storage.memory import MemoryStorage
 from airiskguard.storage.sqlite import SQLiteStorage
+from airiskguard.standards import STANDARD_V1, StandardAssessor
 from airiskguard.types import (
     CheckResult,
     ModelInfo,
@@ -51,6 +52,8 @@ __all__ = [
     "RiskLevel",
     "RiskReport",
     "SQLiteStorage",
+    "STANDARD_V1",
+    "StandardAssessor",
     "StorageBackend",
     "__version__",
     "risk_guard",

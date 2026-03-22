@@ -1,0 +1,97 @@
+site_name: airiskguard
+site_url: https://www.airiskguard.ai
+site_description: AI Risk Governance Framework — standards, guardrails, and compliance for AI systems.
+site_author: airiskguard contributors
+repo_url: https://github.com/gobeyondfj-cmd/airiskguard
+repo_name: airiskguard
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  favicon: assets/favicon.png
+  logo: assets/logo.png
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+    - toc.follow
+
+nav:
+  - Home: index.md
+  - Standard:
+    - AI Risk Management Standard v1.0: standard/ai-risk-management-standard-v1.md
+  - Framework:
+    - Getting Started: framework/getting-started.md
+    - Risk Checkers: framework/checkers.md
+    - Configuration: framework/configuration.md
+    - Architecture: framework/architecture.md
+  - Compliance:
+    - Framework Mapping: compliance/mapping.md
+  - API Reference:
+    - Standards API: api/standards.md
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.mark
+  - pymdownx.critic
+  - pymdownx.keys
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/gobeyondfj-cmd/airiskguard
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/airiskguard/
+  generator: false
+
+extra_css:
+  - stylesheets/extra.css
+
+copyright: Copyright &copy; 2026 airiskguard contributors
