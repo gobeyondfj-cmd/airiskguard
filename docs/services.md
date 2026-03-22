@@ -55,8 +55,8 @@ We'd love to hear from you — whether you have a question, need a quote, or wan
 | Need | Contact |
 |------|---------|
 | General inquiries | [support@airiskguard.ai](mailto:support@airiskguard.ai) |
-| Consulting & services | [support@airiskguard.ai](mailto:support@airiskguard.ai) |
-| Partnership opportunities | [support@airiskguard.ai](mailto:support@airiskguard.ai) |
+| Consulting & services | [consult@airiskguard.ai](mailto:consult@airiskguard.ai) |
+| Partnership opportunities | [partnership@airiskguard.ai](mailto:partnership@airiskguard.ai) |
 | Bug reports & feature requests | [GitHub Issues](https://github.com/gobeyondfj-cmd/airiskguard/issues) |
 
 We typically respond within 1-2 business days.
