@@ -40,7 +40,7 @@ AI Risk Governance Framework — standards, guardrails, and compliance for AI sy
 </p>
 
 <div class="buttons">
-<a href="standard/ai-risk-management-standard-v1.md" class="btn-primary">Read the Standard</a>
+<a href="standard/ai-risk-management-standard-v1/" class="btn-primary">Read the Standard</a>
 <a href="framework/getting-started/" class="btn-secondary">Get Started</a>
 </div>
 
