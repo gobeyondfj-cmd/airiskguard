@@ -45,6 +45,7 @@ nav:
     - AI Risk Management Standard v1.0: standard/ai-risk-management-standard-v1.md
   - Framework:
     - Getting Started: framework/getting-started.md
+    - Integrations: framework/integrations.md
     - Risk Checkers: framework/checkers.md
     - Configuration: framework/configuration.md
     - Architecture: framework/architecture.md

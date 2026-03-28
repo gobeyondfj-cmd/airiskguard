@@ -17,6 +17,8 @@ class RiskGuardConfig:
     # Storage
     storage_backend: str = "memory"
     storage_path: str = ""
+    storage_pool_min_size: int = 2
+    storage_pool_max_size: int = 10
 
     # Risk thresholds
     block_threshold: RiskLevel = RiskLevel.CRITICAL

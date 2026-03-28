@@ -99,6 +99,20 @@ class RiskGuard:
             path = self.config.storage_path or ".airiskguard"
             from airiskguard.storage.json_file import JSONFileStorage
             return JSONFileStorage(directory=path)
+        if backend == "postgres":
+            dsn = self.config.storage_path
+            if not dsn:
+                raise ValueError("storage_path must be a PostgreSQL DSN when using postgres backend")
+            from airiskguard.storage.postgres import PostgreSQLStorage
+            return PostgreSQLStorage(
+                dsn=dsn,
+                min_size=self.config.storage_pool_min_size,
+                max_size=self.config.storage_pool_max_size,
+            )
+        if backend == "redis":
+            url = self.config.storage_path or "redis://localhost:6379"
+            from airiskguard.storage.redis import RedisStorage
+            return RedisStorage(url=url)
         return MemoryStorage()
 
     async def initialize(self) -> None:

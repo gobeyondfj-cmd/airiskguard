@@ -44,6 +44,21 @@ fastapi = [
 flask = [
     "flask>=2.0",
 ]
+postgres = [
+    "asyncpg>=0.27",
+]
+redis = [
+    "redis[asyncio]>=5.0",
+]
+langchain = [
+    "langchain-core>=0.1",
+]
+llamaindex = [
+    "llama-index-core>=0.10",
+]
+openai = [
+    "openai>=1.0",
+]
 dev = [
     "pytest>=7.0",
     "pytest-asyncio>=0.21",
@@ -53,7 +68,7 @@ dev = [
     "httpx>=0.24",
 ]
 all = [
-    "airiskguard[transformers,fastapi,flask,dev]",
+    "airiskguard[transformers,fastapi,flask,postgres,redis,langchain,llamaindex,openai,dev]",
 ]
 
 [tool.hatch.version]

@@ -12,6 +12,11 @@ With optional extras:
 pip install airiskguard[fastapi]         # FastAPI integration
 pip install airiskguard[flask]           # Flask integration
 pip install airiskguard[transformers]    # ML-based hallucination detection (NLI)
+pip install airiskguard[langchain]       # LangChain integration
+pip install airiskguard[llamaindex]      # LlamaIndex integration
+pip install airiskguard[openai]          # OpenAI SDK drop-in wrapper
+pip install airiskguard[postgres]        # PostgreSQL storage backend
+pip install airiskguard[redis]           # Redis storage backend
 pip install airiskguard[dev]             # Development tools
 ```
 
