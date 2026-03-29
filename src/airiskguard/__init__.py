@@ -23,6 +23,7 @@ from airiskguard.exceptions import RiskBlockedError
 from airiskguard.integrations.decorator import risk_guard
 from airiskguard.policy import Policy, PolicyEngine, PolicyResult, PolicyViolation
 from airiskguard.storage.base import StorageBackend
+from airiskguard.telemetry import TelemetryExporter
 from airiskguard.storage.memory import MemoryStorage
 from airiskguard.storage.sqlite import SQLiteStorage
 from airiskguard.standards import STANDARD_V1, StandardAssessor
@@ -60,6 +61,7 @@ __all__ = [
     "STANDARD_V1",
     "StandardAssessor",
     "StorageBackend",
+    "TelemetryExporter",
     "__version__",
     "risk_guard",
 ]
@@ -73,6 +75,7 @@ class RiskGuard:
         config: str | dict[str, Any] | RiskGuardConfig | None = None,
         storage: StorageBackend | None = None,
         policies: str | dict[str, Any] | list[dict] | None = None,
+        telemetry: TelemetryExporter | None = None,
     ) -> None:
         if isinstance(config, RiskGuardConfig):
             self.config = config
@@ -94,6 +97,7 @@ class RiskGuard:
             auto_escalate=self.config.review_auto_escalate,
         )
         self.policy = PolicyEngine.from_config(policies)
+        self.telemetry = telemetry or TelemetryExporter()
         self._checkers: dict[str, BaseChecker] = {}
         self._initialized = False
 
@@ -152,82 +156,92 @@ class RiskGuard:
         checker_names = checks or list(self._checkers.keys())
         results: list[CheckResult] = []
 
-        for name in checker_names:
-            checker = self._checkers.get(name)
-            if not checker:
-                continue
-            result = await checker.check(input_data, output_data, context)
-            results.append(result)
+        span = self.telemetry.start_evaluation_span(model_id, checker_names)
+        try:
+            for name in checker_names:
+                checker = self._checkers.get(name)
+                if not checker:
+                    continue
+                result = await checker.check(input_data, output_data, context)
+                results.append(result)
 
-        # Aggregate
-        if results:
-            max_score = max(r.score for r in results)
-            max_risk = max(r.risk_level for r in results)
-        else:
-            max_score = 0.0
-            max_risk = RiskLevel.LOW
+            # Aggregate
+            if results:
+                max_score = max(r.score for r in results)
+                max_risk = max(r.risk_level for r in results)
+            else:
+                max_score = 0.0
+                max_risk = RiskLevel.LOW
 
-        blocked = (
-            max_risk >= self.config.block_threshold
-            or max_score >= self.config.score_block_threshold
-        )
-        passed = all(r.passed for r in results) if results else True
+            blocked = (
+                max_risk >= self.config.block_threshold
+                or max_score >= self.config.score_block_threshold
+            )
+            passed = all(r.passed for r in results) if results else True
 
-        report = RiskReport(
-            model_id=model_id,
-            overall_risk=max_risk,
-            overall_score=max_score,
-            passed=passed,
-            check_results=results,
-            blocked=blocked,
-        )
-
-        # Audit logging
-        if self.config.audit_enabled:
-            await self.audit.log_decision(
+            report = RiskReport(
                 model_id=model_id,
-                action="blocked" if blocked else "allowed",
-                risk_level=max_risk,
-                score=max_score,
-                input_data=input_data,
-                output_data=output_data,
-                details={"check_results": [r.checker_name for r in results]},
+                overall_risk=max_risk,
+                overall_score=max_score,
+                passed=passed,
+                check_results=results,
+                blocked=blocked,
             )
 
-        # Dashboard metrics
-        if self.config.dashboard_enabled:
-            checker_results = {
-                r.checker_name: {"score": r.score, "risk_level": r.risk_level.value}
-                for r in results
-            }
-            await self.dashboard.record_evaluation(
-                model_id=model_id,
-                risk_level=max_risk,
-                score=max_score,
-                checker_results=checker_results,
-            )
+            # Audit logging
+            if self.config.audit_enabled:
+                await self.audit.log_decision(
+                    model_id=model_id,
+                    action="blocked" if blocked else "allowed",
+                    risk_level=max_risk,
+                    score=max_score,
+                    input_data=input_data,
+                    output_data=output_data,
+                    details={"check_results": [r.checker_name for r in results]},
+                )
 
-        # Policy engine — override blocked/review based on declarative rules
-        if self.policy._policies:
-            policy_result = self.policy.evaluate(report)
-            if policy_result.blocked:
-                blocked = True
-                report.blocked = True
-                report.metadata["policy_violations"] = [
-                    {"policy": v.policy_name, "action": v.action, "description": v.description}
-                    for v in policy_result.violations
-                ]
-            if policy_result.should_review:
-                report.metadata.setdefault("policy_violations", [
-                    {"policy": v.policy_name, "action": v.action, "description": v.description}
-                    for v in policy_result.violations
-                ])
+            # Dashboard metrics
+            if self.config.dashboard_enabled:
+                checker_results = {
+                    r.checker_name: {"score": r.score, "risk_level": r.risk_level.value}
+                    for r in results
+                }
+                await self.dashboard.record_evaluation(
+                    model_id=model_id,
+                    risk_level=max_risk,
+                    score=max_score,
+                    checker_results=checker_results,
+                )
 
-        # Review workflow
-        if self.config.review_enabled and self.review.should_flag(report):
-            await self.review.flag_for_review(model_id, report)
+            # Policy engine
+            if self.policy._policies:
+                policy_result = self.policy.evaluate(report)
+                if policy_result.blocked:
+                    blocked = True
+                    report.blocked = True
+                    report.metadata["policy_violations"] = [
+                        {"policy": v.policy_name, "action": v.action, "description": v.description}
+                        for v in policy_result.violations
+                    ]
+                if policy_result.should_review:
+                    report.metadata.setdefault("policy_violations", [
+                        {"policy": v.policy_name, "action": v.action, "description": v.description}
+                        for v in policy_result.violations
+                    ])
 
-        return report
+            # Review workflow
+            if self.config.review_enabled and self.review.should_flag(report):
+                await self.review.flag_for_review(model_id, report)
+
+            # Telemetry
+            self.telemetry.record_evaluation(report, model_id)
+            self.telemetry.finish_evaluation_span(span, report)
+
+            return report
+
+        except Exception as exc:
+            self.telemetry.record_exception(span, exc)
+            raise
 
     def evaluate_sync(
         self,

@@ -50,6 +50,7 @@ nav:
     - Configuration: framework/configuration.md
     - Architecture: framework/architecture.md
     - Benchmarks: framework/benchmarks.md
+    - OpenTelemetry: framework/opentelemetry.md
   - Compliance:
     - Framework Mapping: compliance/mapping.md
   - API Reference:
