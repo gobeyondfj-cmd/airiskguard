@@ -21,6 +21,7 @@ from airiskguard.core.reports import ReportGenerator
 from airiskguard.core.review import ReviewWorkflow
 from airiskguard.exceptions import RiskBlockedError
 from airiskguard.integrations.decorator import risk_guard
+from airiskguard.policy import Policy, PolicyEngine, PolicyResult, PolicyViolation
 from airiskguard.storage.base import StorageBackend
 from airiskguard.storage.memory import MemoryStorage
 from airiskguard.storage.sqlite import SQLiteStorage
@@ -42,6 +43,10 @@ __all__ = [
     "ModelLifecycle",
     "ModelRegistry",
     "MemoryStorage",
+    "Policy",
+    "PolicyEngine",
+    "PolicyResult",
+    "PolicyViolation",
     "ReportGenerator",
     "ReviewStatus",
     "ReviewWorkflow",
@@ -67,6 +72,7 @@ class RiskGuard:
         self,
         config: str | dict[str, Any] | RiskGuardConfig | None = None,
         storage: StorageBackend | None = None,
+        policies: str | dict[str, Any] | list[dict] | None = None,
     ) -> None:
         if isinstance(config, RiskGuardConfig):
             self.config = config
@@ -87,6 +93,7 @@ class RiskGuard:
             review_threshold=self.config.review_threshold,
             auto_escalate=self.config.review_auto_escalate,
         )
+        self.policy = PolicyEngine.from_config(policies)
         self._checkers: dict[str, BaseChecker] = {}
         self._initialized = False
 
@@ -199,6 +206,22 @@ class RiskGuard:
                 score=max_score,
                 checker_results=checker_results,
             )
+
+        # Policy engine — override blocked/review based on declarative rules
+        if self.policy._policies:
+            policy_result = self.policy.evaluate(report)
+            if policy_result.blocked:
+                blocked = True
+                report.blocked = True
+                report.metadata["policy_violations"] = [
+                    {"policy": v.policy_name, "action": v.action, "description": v.description}
+                    for v in policy_result.violations
+                ]
+            if policy_result.should_review:
+                report.metadata.setdefault("policy_violations", [
+                    {"policy": v.policy_name, "action": v.action, "description": v.description}
+                    for v in policy_result.violations
+                ])
 
         # Review workflow
         if self.config.review_enabled and self.review.should_flag(report):
