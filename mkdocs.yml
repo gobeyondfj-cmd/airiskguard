@@ -49,6 +49,7 @@ nav:
     - Risk Checkers: framework/checkers.md
     - Configuration: framework/configuration.md
     - Architecture: framework/architecture.md
+    - Benchmarks: framework/benchmarks.md
   - Compliance:
     - Framework Mapping: compliance/mapping.md
   - API Reference:

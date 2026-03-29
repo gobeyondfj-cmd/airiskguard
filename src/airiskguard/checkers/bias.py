@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import Any
 
 from airiskguard.checkers.base import BaseChecker
@@ -53,9 +54,13 @@ class BiasChecker(BaseChecker):
             flags.extend(eo_flags)
             score = max(score, eo_score)
 
-        # Check output text for biased language
-        if output_data and isinstance(output_data, str):
-            lang_flags, lang_score = _check_biased_language(output_data)
+        # Check input and output text for biased language
+        text_to_check = " ".join(filter(None, [
+            str(input_data) if isinstance(input_data, str) else "",
+            str(output_data) if isinstance(output_data, str) else "",
+        ]))
+        if text_to_check.strip():
+            lang_flags, lang_score = _check_biased_language(text_to_check)
             flags.extend(lang_flags)
             score = max(score, lang_score)
 
@@ -164,6 +169,37 @@ def _check_equalized_odds(
 _BIASED_TERMS = [
     "always lazy", "naturally inferior", "inherently violent",
     "genetically predisposed to", "those people",
+    # Gender bias
+    "not as good at", "better leaders than", "worse at",
+    "men are better", "women are better", "men are smarter", "women are smarter",
+    # Racial/ethnic bias
+    "are all criminals", "are naturally", "are genetically",
+    "that race", "that ethnicity", "ethnic group is",
+    # Age bias
+    "old people can't", "elderly can't", "too old to",
+    # Socioeconomic bias
+    "poor people are poor because", "lazy poor",
+    # Immigration bias
+    "taking our jobs", "all immigrants",
+    # Disability bias
+    "burden on society", "disabled people are a burden",
+    # Religious bias
+    "that religion is", "inherently violent religion",
+]
+
+_BIASED_PATTERNS = [
+    re.compile(p, re.IGNORECASE) for p in [
+        r"\b(?:women|men|girls|boys)\s+(?:are|can't|cannot|don't|do not)\s+(?:as good|as smart|as capable)",
+        r"\b(?:all|every)\s+(?:immigrants?|foreigners?|muslims?|christians?|jews?|blacks?|whites?|asians?)\s+(?:are|is)\b",
+        r"\b(?:old|elderly|senior)\s+people\s+(?:can't|cannot|don't|are not able)",
+        r"\b(?:poor|homeless)\s+people\s+(?:are|deserve|should)\b",
+        r"\b(?:that|those)\s+(?:race|ethnicity|religion|group)\s+(?:is|are)\b",
+        r"\b(?:men|women)\s+are\s+(?:better|worse|smarter|dumber|superior|inferior)\s+(?:than|to)\b",
+        r"\bgenetically\s+(?:inferior|superior|predisposed)\b",
+        r"\bnaturally\s+(?:lazy|violent|criminal|inferior|superior)\b",
+        r"\binherently\s+(?:lazy|violent|criminal|inferior|superior)\b",
+        r"\b(?:disabled|handicapped)\s+people\s+are\s+a\s+burden\b",
+    ]
 ]
 
 
@@ -176,6 +212,11 @@ def _check_biased_language(text: str) -> tuple[list[str], float]:
         if term in text_lower:
             flags.append(f"biased_language: '{term}'")
             score = max(score, 0.7)
+
+    for pattern in _BIASED_PATTERNS:
+        if pattern.search(text):
+            flags.append(f"biased_pattern: '{pattern.pattern[:40]}'")
+            score = max(score, 0.75)
 
     return flags, score
 

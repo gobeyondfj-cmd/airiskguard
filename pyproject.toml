@@ -71,6 +71,9 @@ all = [
     "airiskguard[transformers,fastapi,flask,postgres,redis,langchain,llamaindex,openai,dev]",
 ]
 
+[project.scripts]
+airiskguard-benchmark = "airiskguard.benchmark.cli:main"
+
 [tool.hatch.version]
 path = "src/airiskguard/_version.py"
 

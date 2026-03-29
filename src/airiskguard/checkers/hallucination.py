@@ -18,7 +18,8 @@ _CITATION_PATTERN = re.compile(
 )
 _CONFIDENCE_MARKERS = [
     "i'm certain", "i can confirm", "definitely", "absolutely",
-    "without a doubt", "100%", "guaranteed",
+    "without a doubt", "100%", "guaranteed", "always works", "never fails",
+    "zero risk", "proven to", "conclusively proven",
 ]
 _CONTRADICTION_PAIRS = [
     ("always", "never"), ("all", "none"), ("increase", "decrease"),
@@ -96,22 +97,22 @@ def _heuristic_check(text: str, context: dict[str, Any]) -> tuple[list[str], flo
     urls = _FABRICATED_URL_PATTERN.findall(text)
     known_urls = context.get("known_urls", [])
     fabricated = [u for u in urls if u not in known_urls]
-    if fabricated and len(fabricated) > len(urls) * 0.5:
+    if fabricated:
         flags.append(f"potential_fabricated_urls ({len(fabricated)})")
-        score = max(score, 0.4)
+        score = max(score, 0.6)
 
     # Suspicious citations
     citations = _CITATION_PATTERN.findall(text)
     if citations:
         flags.append(f"unverifiable_citations ({len(citations)})")
-        score = max(score, 0.3)
+        score = max(score, 0.55)
 
     # Overconfident language
     text_lower = text.lower()
     confidence_count = sum(1 for m in _CONFIDENCE_MARKERS if m in text_lower)
-    if confidence_count >= 2:
+    if confidence_count >= 1:
         flags.append(f"overconfident_language ({confidence_count} markers)")
-        score = max(score, 0.3)
+        score = max(score, 0.55)
 
     # Internal contradictions
     for a, b in _CONTRADICTION_PAIRS:
