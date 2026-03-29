@@ -29,8 +29,9 @@ def _auto_register() -> None:
     from airiskguard.checkers.fraud import FraudChecker
     from airiskguard.checkers.hallucination import HallucinationChecker
     from airiskguard.checkers.security import SecurityChecker
+    from airiskguard.checkers.toxicity import ToxicityChecker
 
-    for cls in (FraudChecker, HallucinationChecker, ComplianceChecker, BiasChecker, SecurityChecker):
+    for cls in (FraudChecker, HallucinationChecker, ComplianceChecker, BiasChecker, SecurityChecker, ToxicityChecker):
         register_checker(cls.name, cls)
 
 

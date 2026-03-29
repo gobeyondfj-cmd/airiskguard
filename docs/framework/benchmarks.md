@@ -30,8 +30,9 @@ Results on the built-in curated dataset (35 samples per checker, balanced positi
 | `compliance` | 100.0% | 66.7% | 80.0% | 83.3% | 0.0% |
 | `hallucination` | 88.9% | 100.0% | 94.1% | 93.3% | 14.3% |
 | `bias` | 100.0% | 100.0% | 100.0% | 100.0% | 0.0% |
+| `toxicity` | 100.0% | 66.7% | 80.0% | 83.3% | 0.0% |
 
-All checkers have **zero false positives** on security, compliance, and bias — benign content is never incorrectly blocked. The hallucination checker has a 14.3% FPR due to aggressive URL detection, which is configurable.
+All checkers have **zero false positives** on security, compliance, bias, and toxicity — benign content is never incorrectly blocked. The hallucination checker has a 14.3% FPR due to aggressive URL detection, which is configurable.
 
 ## Dataset Details
 
@@ -43,6 +44,7 @@ Each checker is evaluated on a curated dataset of positive (should be flagged) a
 | `compliance` | 30 | 15 | 15 | PII (SSN, email, credit card, phone), prohibited content |
 | `hallucination` | 15 | 8 | 7 | Fabricated URLs, citations, overconfident claims |
 | `bias` | 20 | 10 | 10 | Gender, racial, age, religious, socioeconomic bias |
+| `toxicity` | 30 | 15 | 15 | Threats, hate speech, insults, profanity |
 
 ## Metric Definitions
 

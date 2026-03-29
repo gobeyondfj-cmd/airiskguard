@@ -38,10 +38,12 @@ class ComplianceChecker(BaseChecker):
         self,
         detect_pii: bool = True,
         detect_prohibited: bool = True,
+        redact_pii: bool = False,
         custom_rules: list[dict[str, str]] | None = None,
     ) -> None:
         self._detect_pii = detect_pii
         self._detect_prohibited = detect_prohibited
+        self._redact_pii = redact_pii
         self._custom_rules: list[tuple[str, re.Pattern[str]]] = []
         if custom_rules:
             for rule in custom_rules:
@@ -55,12 +57,15 @@ class ComplianceChecker(BaseChecker):
         text = f"{input_data} {output_data}" if output_data else str(input_data)
         flags: list[str] = []
         score = 0.0
+        redacted_text: str | None = None
 
-        # PII detection
+        # PII detection (and optional redaction)
         if self._detect_pii:
-            pii_flags, pii_score = _detect_pii(text)
+            pii_flags, pii_score, redacted = _detect_pii(text, redact=self._redact_pii)
             flags.extend(pii_flags)
             score = max(score, pii_score)
+            if self._redact_pii and redacted != text:
+                redacted_text = redacted
 
         # Prohibited content
         if self._detect_prohibited:
@@ -76,27 +81,34 @@ class ComplianceChecker(BaseChecker):
                 score = max(score, 0.6)
 
         risk = _score_to_risk(score)
+        details: dict[str, Any] = {"flags": flags}
+        if redacted_text is not None:
+            details["redacted_text"] = redacted_text
+
         return CheckResult(
             checker_name=self.name,
             risk_level=risk,
             passed=risk <= RiskLevel.MEDIUM,
             score=score,
-            details={"flags": flags},
+            details=details,
         )
 
 
-def _detect_pii(text: str) -> tuple[list[str], float]:
+def _detect_pii(text: str, redact: bool = False) -> tuple[list[str], float, str]:
     flags: list[str] = []
     score = 0.0
     pii_weights = {"ssn": 0.9, "credit_card": 0.9, "email": 0.4, "phone_us": 0.5, "ip_address": 0.3}
+    redacted = text
 
     for name, pattern in _PII_PATTERNS.items():
         matches = pattern.findall(text)
         if matches:
             flags.append(f"pii_{name} ({len(matches)} found)")
             score = max(score, pii_weights.get(name, 0.5))
+            if redact:
+                redacted = pattern.sub(f"[REDACTED_{name.upper()}]", redacted)
 
-    return flags, score
+    return flags, score, redacted
 
 
 def _detect_prohibited(text: str) -> tuple[list[str], float]:
