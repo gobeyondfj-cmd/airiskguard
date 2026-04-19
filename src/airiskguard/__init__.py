@@ -26,6 +26,7 @@ from airiskguard.storage.base import StorageBackend
 from airiskguard.telemetry import TelemetryExporter
 from airiskguard.storage.memory import MemoryStorage
 from airiskguard.storage.sqlite import SQLiteStorage
+from airiskguard.notifications import NotificationManager, NotificationChannel, WebhookChannel, SlackChannel, EmailChannel, PagerDutyChannel
 from airiskguard.standards import STANDARD_V1, StandardAssessor
 from airiskguard.types import (
     CheckResult,
@@ -44,6 +45,12 @@ __all__ = [
     "ModelLifecycle",
     "ModelRegistry",
     "MemoryStorage",
+    "NotificationManager",
+    "NotificationChannel",
+    "WebhookChannel",
+    "SlackChannel",
+    "EmailChannel",
+    "PagerDutyChannel",
     "Policy",
     "PolicyEngine",
     "PolicyResult",
@@ -76,6 +83,7 @@ class RiskGuard:
         storage: StorageBackend | None = None,
         policies: str | dict[str, Any] | list[dict] | None = None,
         telemetry: TelemetryExporter | None = None,
+        notifications: NotificationManager | None = None,
     ) -> None:
         if isinstance(config, RiskGuardConfig):
             self.config = config
@@ -98,6 +106,7 @@ class RiskGuard:
         )
         self.policy = PolicyEngine.from_config(policies)
         self.telemetry = telemetry or TelemetryExporter()
+        self.notifications = notifications or NotificationManager()
         self._checkers: dict[str, BaseChecker] = {}
         self._initialized = False
 
@@ -236,6 +245,9 @@ class RiskGuard:
             # Telemetry
             self.telemetry.record_evaluation(report, model_id)
             self.telemetry.finish_evaluation_span(span, report)
+
+            # Notifications
+            await self.notifications.notify(report)
 
             return report
 

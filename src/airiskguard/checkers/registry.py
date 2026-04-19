@@ -24,6 +24,7 @@ def list_checkers() -> list[str]:
 
 
 def _auto_register() -> None:
+    from airiskguard.checkers.agent import AgentChecker
     from airiskguard.checkers.bias import BiasChecker
     from airiskguard.checkers.compliance import ComplianceChecker
     from airiskguard.checkers.fraud import FraudChecker
@@ -31,7 +32,7 @@ def _auto_register() -> None:
     from airiskguard.checkers.security import SecurityChecker
     from airiskguard.checkers.toxicity import ToxicityChecker
 
-    for cls in (FraudChecker, HallucinationChecker, ComplianceChecker, BiasChecker, SecurityChecker, ToxicityChecker):
+    for cls in (AgentChecker, FraudChecker, HallucinationChecker, ComplianceChecker, BiasChecker, SecurityChecker, ToxicityChecker):
         register_checker(cls.name, cls)
 
 
