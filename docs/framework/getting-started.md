@@ -9,15 +9,17 @@ pip install airiskguard
 With optional extras:
 
 ```bash
-pip install airiskguard[fastapi]         # FastAPI integration
-pip install airiskguard[flask]           # Flask integration
-pip install airiskguard[transformers]    # ML-based hallucination detection (NLI)
-pip install airiskguard[langchain]       # LangChain integration
-pip install airiskguard[llamaindex]      # LlamaIndex integration
-pip install airiskguard[openai]          # OpenAI SDK drop-in wrapper
-pip install airiskguard[postgres]        # PostgreSQL storage backend
-pip install airiskguard[redis]           # Redis storage backend
-pip install airiskguard[dev]             # Development tools
+pip install "airiskguard[gateway]"        # Enterprise AI coding gateway
+pip install "airiskguard[fastapi]"        # FastAPI integration
+pip install "airiskguard[flask]"          # Flask integration
+pip install "airiskguard[langchain]"      # LangChain integration
+pip install "airiskguard[llamaindex]"     # LlamaIndex integration
+pip install "airiskguard[openai]"         # OpenAI SDK drop-in wrapper
+pip install "airiskguard[postgres]"       # PostgreSQL storage backend
+pip install "airiskguard[redis]"          # Redis storage backend
+pip install "airiskguard[opentelemetry]"  # OTel traces + metrics
+pip install "airiskguard[transformers]"   # ML-based hallucination detection
+pip install "airiskguard[dev]"            # Development tools
 ```
 
 ## Quick Start
@@ -56,7 +58,7 @@ For synchronous code, use `guard.evaluate_sync(...)` instead.
 
 ## Guarding LLM Calls
 
-Wrap any LLM API call (OpenAI, Anthropic, etc.) with pre- and post-evaluation:
+Wrap any LLM API call with pre- and post-evaluation:
 
 ```python
 from airiskguard import RiskGuard
@@ -67,25 +69,18 @@ guard = RiskGuard(config={
 })
 
 async def chat(user_message: str) -> str:
-    # Pre-check: block prompt injection, PII leakage, jailbreaks
     pre = await guard.evaluate(
-        input_data=user_message,
-        output_data="",
-        model_id="chatbot-v1",
-        checks=["security", "compliance"],
+        input_data=user_message, output_data="",
+        model_id="chatbot-v1", checks=["security", "compliance"],
     )
     if pre.blocked:
         return "Your message was flagged for safety reasons."
 
-    # Call your LLM
     llm_response = await call_openai(user_message)
 
-    # Post-check: catch hallucinations, compliance violations
     post = await guard.evaluate(
-        input_data=user_message,
-        output_data=llm_response,
-        model_id="chatbot-v1",
-        checks=["hallucination", "compliance"],
+        input_data=user_message, output_data=llm_response,
+        model_id="chatbot-v1", checks=["hallucination", "compliance"],
     )
     if post.blocked:
         return "I'm unable to provide that response."
@@ -94,8 +89,6 @@ async def chat(user_message: str) -> str:
 ```
 
 ## RAG Pipeline Safety
-
-Check both retrieved context and generated responses:
 
 ```python
 # Check retrieved documents for compliance (PII, prohibited content)
@@ -118,12 +111,9 @@ answer_check = await guard.evaluate(
 
 ## Multi-Agent Systems
 
-Use a shared `RiskGuard` instance across agents for unified audit trails:
-
 ```python
 guard = RiskGuard()
 
-# Each agent uses its own model_id for tracking
 planner_report = await guard.evaluate(
     input_data=task, output_data=plan,
     model_id="planner-agent",
@@ -134,74 +124,50 @@ coder_report = await guard.evaluate(
     model_id="coder-agent",
 )
 
-# Per-agent dashboards
 planner_stats = await guard.dashboard.get_summary(model_id="planner-agent")
 coder_stats = await guard.dashboard.get_summary(model_id="coder-agent")
 ```
 
 ## FastAPI Middleware
 
-Add risk governance to a chat API with one-line middleware:
-
 ```python
 from fastapi import FastAPI
-from airiskguard import RiskGuard
 from airiskguard.integrations.fastapi import add_risk_guard
 
 app = FastAPI()
-guard = RiskGuard()
-
-# Automatic middleware (adds x-risk-score, x-risk-level headers)
-add_risk_guard(app, config={
-    "enabled_checkers": ["security", "compliance"]
-})
+add_risk_guard(app, config={"enabled_checkers": ["security", "compliance"]})
 ```
 
 ## Custom Checkers
-
-Write domain-specific checkers by extending `BaseChecker`:
 
 ```python
 from airiskguard.checkers.base import BaseChecker
 from airiskguard.checkers.registry import register_checker
 from airiskguard.types import CheckResult, RiskLevel
 
-class ToxicityChecker(BaseChecker):
-    name = "toxicity"
-
-    def __init__(self, threshold: float = 0.7):
-        self.threshold = threshold
+class MyChecker(BaseChecker):
+    name = "my_checker"
 
     async def check(self, input_data, output_data, context=None):
-        toxicity_score = await detect_toxicity(output_data)
-        risk = RiskLevel.HIGH if toxicity_score >= self.threshold else RiskLevel.LOW
+        score = await my_detection_logic(output_data)
         return CheckResult(
             checker_name=self.name,
-            risk_level=risk,
-            passed=toxicity_score < self.threshold,
-            score=toxicity_score,
+            risk_level=RiskLevel.HIGH if score >= 0.7 else RiskLevel.LOW,
+            passed=score < 0.7,
+            score=score,
         )
 
-register_checker("toxicity", ToxicityChecker)
+register_checker("my_checker", MyChecker)
 ```
 
 ## Assessing Against the Standard
-
-Evaluate your AI system against AIRMS v1.0:
 
 ```python
 from airiskguard.standards import STANDARD_V1, StandardAssessor
 
 assessor = StandardAssessor(STANDARD_V1)
-
-# Record manually verified controls
 assessor.set_control_status("ACC-GOV-01", implemented=True, maturity=3)
-assessor.set_control_status("TRA-DIS-01", implemented=True, maturity=4)
-
-# Integrate automated checker results
 assessor.apply_checker_results(report)
-
-# Run full assessment
 result = assessor.assess(model_id="my-model")
 print(result.summary())
 ```

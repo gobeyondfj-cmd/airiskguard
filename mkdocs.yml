@@ -55,6 +55,8 @@ nav:
     - Framework Mapping: compliance/mapping.md
   - API Reference:
     - Standards API: api/standards.md
+  - Gateway:
+    - Enterprise AI Coding Gateway: gateway/index.md
   - AI Risk Trends: trends/index.md
   - Services & Contact: services.md
 
