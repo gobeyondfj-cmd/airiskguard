@@ -63,6 +63,10 @@ opentelemetry = [
     "opentelemetry-api>=1.20",
     "opentelemetry-sdk>=1.20",
 ]
+gateway = [
+    "httpx>=0.24",
+    "uvicorn>=0.15",
+]
 dev = [
     "pytest>=7.0",
     "pytest-asyncio>=0.21",
@@ -72,11 +76,12 @@ dev = [
     "httpx>=0.24",
 ]
 all = [
-    "airiskguard[transformers,fastapi,flask,postgres,redis,langchain,llamaindex,openai,opentelemetry,dev]",
+    "airiskguard[transformers,fastapi,flask,postgres,redis,langchain,llamaindex,openai,opentelemetry,gateway,dev]",
 ]
 
 [project.scripts]
 airiskguard-benchmark = "airiskguard.benchmark.cli:main"
+airiskguard-gateway = "airiskguard.gateway.server:main"
 
 [tool.hatch.version]
 path = "src/airiskguard/_version.py"

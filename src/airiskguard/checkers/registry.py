@@ -29,10 +29,13 @@ def _auto_register() -> None:
     from airiskguard.checkers.compliance import ComplianceChecker
     from airiskguard.checkers.fraud import FraudChecker
     from airiskguard.checkers.hallucination import HallucinationChecker
+    from airiskguard.checkers.secrets import SecretsChecker
     from airiskguard.checkers.security import SecurityChecker
     from airiskguard.checkers.toxicity import ToxicityChecker
+    from airiskguard.checkers.vuln import VulnChecker
 
-    for cls in (AgentChecker, FraudChecker, HallucinationChecker, ComplianceChecker, BiasChecker, SecurityChecker, ToxicityChecker):
+    for cls in (AgentChecker, FraudChecker, HallucinationChecker, ComplianceChecker,
+                BiasChecker, SecurityChecker, ToxicityChecker, SecretsChecker, VulnChecker):
         register_checker(cls.name, cls)
 
 
