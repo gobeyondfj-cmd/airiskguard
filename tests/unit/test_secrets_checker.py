@@ -128,6 +128,7 @@ async def test_jwt_token(checker):
 # --- Stripe keys ---
 
 async def test_stripe_secret_key(checker):
+    # Use a clearly fake/truncated key that won't trigger push protection
     result = await checker.check("stripe_key = sk_live_FAKE_TEST_KEY_xxxx", "", {})
     assert not result.passed
     assert "stripe_secret_key" in result.details["flags"]
