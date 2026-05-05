@@ -356,6 +356,35 @@ RiskGuard (SDK orchestrator)
 | [`multi_agent.py`](examples/multi_agent.py) | Multi-agent with per-agent tracking |
 | [`fastapi_app.py`](examples/fastapi_app.py) | FastAPI chat API with risk headers |
 
+## Editions
+
+airiskguard is open-core. The community edition (this repo) is free and open-source. Team and Enterprise editions add centralized management, compliance reporting, and enterprise integrations.
+
+| Feature | Community | Team | Enterprise |
+|---|:---:|:---:|:---:|
+| Local HTTPS proxy | ✓ | ✓ | ✓ |
+| Secret detection (18 types) | ✓ | ✓ | ✓ |
+| OWASP Top 10 inbound scanning | ✓ | ✓ | ✓ |
+| Local YAML config | ✓ | ✓ | ✓ |
+| Model allowlist | ✓ | ✓ | ✓ |
+| **Centralized policy server** | — | ✓ | ✓ |
+| **Per-team policies + gateway-issued keys** | — | ✓ | ✓ |
+| **Dashboard (web UI)** | — | ✓ | ✓ |
+| **ML-based PII detection** | — | ✓ | ✓ |
+| **30-day audit log (centralized, searchable)** | — | ✓ | ✓ |
+| **SSO (SAML / OIDC)** | — | ✓ | ✓ |
+| **Slack / PagerDuty / webhook notifications** | — | ✓ | ✓ |
+| **Custom scanning rules** | — | — | ✓ |
+| **Compliance reports (EU AI Act, SOC 2, ISO 42001)** | — | — | ✓ |
+| **Unlimited audit log + SIEM export** | — | — | ✓ |
+| **RBAC (admin / policy-author / viewer)** | — | — | ✓ |
+| **Self-hosted / air-gapped deployment** | — | — | ✓ |
+| **SLA + dedicated support** | — | — | ✓ |
+| **Incident response playbooks** | — | — | ✓ |
+| **Pricing** | Free | Per seat / month | Annual contract |
+
+**[Contact us](mailto:sales@airiskguard.ai) for Team and Enterprise access.**
+
 ## License
 
-MIT
+MIT — Community Edition only. Team and Enterprise editions are distributed under a commercial license. See [airiskguard.ai/pricing](https://www.airiskguard.ai/pricing/) for details.
