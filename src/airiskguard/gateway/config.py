@@ -62,6 +62,8 @@ class GatewayConfig:
     host: str = "0.0.0.0"
     port: int = 8080
     log_level: str = "info"
+    policy_server_url: str | None = None
+    poll_interval: int = 60
 
     # Maps gateway API key → TeamPolicy (built at load time)
     _key_to_team: dict[str, TeamPolicy] = field(default_factory=dict, repr=False)
@@ -126,4 +128,6 @@ class GatewayConfig:
             port=raw.get("port", 8080),
             log_level=raw.get("log_level", "info"),
         )
+        config.policy_server_url = raw.get("policy_server_url")
+        config.poll_interval = int(raw.get("poll_interval", 60))
         return cfg

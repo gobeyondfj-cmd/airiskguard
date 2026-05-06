@@ -23,6 +23,7 @@ Flow:
 
 from __future__ import annotations
 
+import asyncio
 import json
 import logging
 from typing import Any
@@ -138,6 +139,69 @@ def _blocked_response(
 # ASGI Gateway Application
 # ---------------------------------------------------------------------------
 
+class PolicyPoller:
+    """Polls Team policy server and hot-reloads config."""
+
+    def __init__(self, config: "GatewayConfig") -> None:
+        self._config = config
+        self._task: asyncio.Task | None = None
+        self._version = 0
+
+    async def start(self) -> None:
+        self._task = asyncio.create_task(self._loop())
+
+    async def _loop(self) -> None:
+        while True:
+            await asyncio.sleep(self._config.poll_interval)
+            try:
+                await self._poll_once()
+            except Exception as exc:
+                import logging
+                logging.getLogger("airiskguard.gateway").warning("Policy poll failed: %s", exc)
+
+    async def _poll_once(self) -> None:
+        # Find a key to authenticate with
+        key = None
+        for team in self._config.teams:
+            if team.api_keys:
+                key = team.api_keys[0]
+                break
+        if not key or not self._config.policy_server_url:
+            return
+        try:
+            import httpx
+            async with httpx.AsyncClient() as client:
+                resp = await client.get(
+                    f"{self._config.policy_server_url}/v1/policies/current",
+                    headers={"X-Gateway-Key": key},
+                    timeout=10,
+                )
+            if resp.status_code != 200:
+                return
+            data = resp.json()
+            if data.get("version", 0) > self._version:
+                self._version = data["version"]
+                cfg = data.get("config", {})
+                # Hot-reload checks and teams
+                if "checks" in cfg:
+                    checks = cfg["checks"]
+                    if "outbound" in checks:
+                        self._config.outbound_checks = checks["outbound"]
+                    if "inbound" in checks:
+                        self._config.inbound_checks = checks["inbound"]
+        except ImportError:
+            # httpx not available, skip
+            pass
+
+    async def stop(self) -> None:
+        if self._task:
+            self._task.cancel()
+            try:
+                await self._task
+            except asyncio.CancelledError:
+                pass
+
+
 class GatewayApp:
     """ASGI reverse proxy with risk inspection.
 
@@ -148,6 +212,7 @@ class GatewayApp:
     def __init__(self, config: GatewayConfig | None = None) -> None:
         self.config = config or GatewayConfig()
         self._guard: RiskGuard | None = None
+        self._poller: PolicyPoller | None = None
         self._notifications = self._build_notifications()
         self._policy = PolicyEngine.from_config(
             self.config.policies if self.config.policies else None
@@ -221,6 +286,28 @@ class GatewayApp:
 
         # Parse headers for team resolution and upstream forwarding
         headers = {k.lower(): v for k, v in scope.get("headers", [])}
+
+        # Extract API key from headers
+        api_key = None
+        for name, value in scope.get("headers", []):
+            name_lower = name.lower() if isinstance(name, str) else name.decode().lower()
+            val = value if isinstance(value, str) else value.decode()
+            if name_lower == "authorization" and val.lower().startswith("bearer "):
+                api_key = val[7:].strip()
+            elif name_lower in ("x-api-key", "x-gateway-key"):
+                api_key = val
+
+        # Validate key if teams are configured
+        team_name = None
+        if self.config.teams:
+            team_name = self.config.team_for_key(api_key) if api_key else None
+            if not team_name:
+                await _send_response(send, 401, json.dumps({
+                    "error": "Invalid or missing gateway API key",
+                    "type": "auth_error"
+                }).encode(), [(b"content-type", b"application/json")])
+                return
+
         auth_header = headers.get(b"authorization", b"").decode()
         gateway_key = auth_header.replace("Bearer ", "").replace("bearer ", "").strip()
         team = self.config.team_for_key(gateway_key)
@@ -352,10 +439,15 @@ class GatewayApp:
             event = await receive()
             if event["type"] == "lifespan.startup":
                 await (await self._get_guard()).initialize()
+                if self.config.policy_server_url:
+                    self._poller = PolicyPoller(self.config)
+                    await self._poller.start()
                 await send({"type": "lifespan.startup.complete"})
             elif event["type"] == "lifespan.shutdown":
                 if self._guard:
                     await self._guard.close()
+                if self._poller:
+                    await self._poller.stop()
                 await send({"type": "lifespan.shutdown.complete"})
                 return
 
