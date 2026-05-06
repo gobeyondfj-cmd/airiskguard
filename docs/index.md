@@ -109,8 +109,8 @@ AI Risk Governance for LLM applications, AI agents, and developer AI coding tool
 </p>
 
 <div class="buttons">
-<a href="gateway/" class="btn-primary">Enterprise Gateway</a>
-<a href="framework/getting-started/" class="btn-secondary">Get Started Free</a>
+<a href="gateway/index.md" class="btn-primary">Enterprise Gateway</a>
+<a href="framework/getting-started.md" class="btn-secondary">Get Started Free</a>
 </div>
 
 </div>
@@ -129,8 +129,8 @@ Codex CLI   ──►   [inspects both]   ──► OpenAI API
             ◄── [blocked if secret / vuln detected]
 ```
 
-<a href="gateway/" class="btn-gw">View Gateway Docs</a>
-<a href="pricing/" class="btn-gw-outline">See Pricing</a>
+<a href="gateway/index.md" class="btn-gw">View Gateway Docs</a>
+<a href="pricing.md" class="btn-gw-outline">See Pricing</a>
 
 </div>
 
@@ -340,8 +340,8 @@ export ANTHROPIC_BASE_URL=http://localhost:8080   # Claude Code now protected
 
 <div style="text-align: center; padding: 2rem 0;" markdown>
 
-[Gateway Docs](gateway/){ .md-button .md-button--primary }
-[Framework Docs](framework/getting-started/){ .md-button }
+[Gateway Docs](gateway/index.md){ .md-button .md-button--primary }
+[Framework Docs](framework/getting-started.md){ .md-button }
 [View on GitHub](https://github.com/gobeyondfj-cmd/airiskguard){ .md-button }
 
 </div>

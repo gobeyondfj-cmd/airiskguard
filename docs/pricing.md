@@ -317,7 +317,7 @@ Simple, transparent pricing. Start free. Scale when you need centralized control
 
 **Ready to get started?**
 
-[Get Community Free](../framework/getting-started/){ .md-button .md-button--primary }
+[Get Community Free](../framework/getting-started.md){ .md-button .md-button--primary }
 [Contact Sales](mailto:sales@airiskguard.ai){ .md-button }
 
 </div>
