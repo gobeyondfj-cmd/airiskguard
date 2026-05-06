@@ -57,6 +57,7 @@ nav:
     - Standards API: api/standards.md
   - Gateway:
     - Enterprise AI Coding Gateway: gateway/index.md
+  - Pricing: pricing.md
   - AI Risk Trends: trends/index.md
   - Services & Contact: services.md
 

@@ -1,5 +1,17 @@
 # Services & Contact
 
+## Gateway Editions
+
+Looking for Team or Enterprise access? See the [pricing page](pricing.md) for a full feature comparison and to contact sales.
+
+| Edition | Best for | Access |
+|---|---|---|
+| **Community** | Individual developers | [Free on PyPI](https://pypi.org/project/airiskguard/) |
+| **Team** | Engineering teams (5–50 devs) | [Contact sales](mailto:sales@airiskguard.ai) |
+| **Enterprise** | 50+ devs, regulated industries | [Contact sales](mailto:sales@airiskguard.ai) |
+
+---
+
 ## How We Can Help
 
 airiskguard provides expert services to help organizations build, assess, and maintain AI risk governance programs aligned with international standards.

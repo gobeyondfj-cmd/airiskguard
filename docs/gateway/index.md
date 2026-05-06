@@ -4,6 +4,36 @@ The airiskguard gateway is a **local HTTPS reverse proxy** that intercepts traff
 
 Developers change **one environment variable**. Everything else works exactly as before — but now your organisation has full visibility, control, and an audit trail over what's being sent to and received from external AI APIs.
 
+## Editions
+
+The gateway ships in three editions. The Community Edition is free and open-source. Team and Enterprise add centralized management, compliance reporting, and enterprise integrations.
+
+| | Community | Team | Enterprise |
+|---|:---:|:---:|:---:|
+| Local HTTPS proxy | ✓ | ✓ | ✓ |
+| Secret detection (18 types) | ✓ | ✓ | ✓ |
+| OWASP Top 10 inbound scanning | ✓ | ✓ | ✓ |
+| Model allowlist | ✓ | ✓ | ✓ |
+| **Centralized policy server** | — | ✓ | ✓ |
+| **Policy hot-reload (polling)** | — | ✓ | ✓ |
+| **Per-team policies + gateway keys** | — | ✓ | ✓ |
+| **Web dashboard** | — | ✓ | ✓ |
+| **ML-based PII detection** | — | ✓ | ✓ |
+| **SSO (SAML / OIDC)** | — | ✓ | ✓ |
+| **30-day centralized audit log** | — | ✓ | ✓ |
+| **Session quarantine** | — | ✓ | ✓ |
+| **Custom scanning rules** | — | — | ✓ |
+| **EU AI Act / SOC 2 / ISO 42001 reports** | — | — | ✓ |
+| **RBAC** | — | — | ✓ |
+| **SIEM integration** | — | — | ✓ |
+| **Incident response playbooks** | — | — | ✓ |
+| **Self-hosted / air-gapped** | — | — | ✓ |
+| **Kubernetes manifests** | — | — | ✓ |
+| **Pricing** | Free | Per seat/mo | Annual contract |
+
+[See full pricing →](../pricing.md){ .md-button .md-button--primary }
+[Contact sales →](mailto:sales@airiskguard.ai){ .md-button }
+
 ## The Problem
 
 When your employees use AI coding assistants:
