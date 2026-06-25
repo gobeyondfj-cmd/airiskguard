@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIRiskGuard Gateway — AI Observability for Regulated Industries</title>
+    <meta name="description" content="Full visibility and control over every AI interaction across your engineering team. Audit logs, policy enforcement, and model risk management built for regulated industries.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #050a14;
+            --bg-surface: #0a1628;
+            --bg-card: rgba(255,255,255,0.03);
+            --cyan: #00d4ff;
+            --cyan-dim: rgba(0,212,255,0.15);
+            --cyan-glow: rgba(0,212,255,0.35);
+            --purple: #7c3aed;
+            --purple-dim: rgba(124,58,237,0.15);
+            --red: #ef4444;
+            --red-dim: rgba(239,68,68,0.15);
+            --text-primary: #e2e8f0;
+            --text-secondary: #7d8fa8;
+            --text-muted: #4a5568;
+            --border: rgba(0,212,255,0.15);
+            --border-subtle: rgba(255,255,255,0.06);
+            --white: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Fade-in animation class ── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Keyframes ── */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+
+        @keyframes border-glow-spin {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50%       { opacity: 1;   transform: scale(1.15); }
+        }
+
+        @keyframes scan-line {
+            0%   { top: 0%; }
+            100% { top: 100%; }
+        }
+
+        /* ── Navigation ── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(5,10,20,0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--cyan-dim);
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-logo-icon {
+            width: 28px; height: 28px;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem;
+            box-shadow: 0 0 12px var(--cyan-glow);
+        }
+
+        .nav-logo span { color: var(--cyan); }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--cyan); }
+
+        .nav-cta {
+            background: var(--cyan) !important;
+            color: #050a14 !important;
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 700 !important;
+            font-size: 0.875rem !important;
+            box-shadow: 0 0 16px rgba(0,212,255,0.3);
+            transition: box-shadow 0.2s, transform 0.2s !important;
+        }
+
+        .nav-cta:hover {
+            box-shadow: 0 0 28px rgba(0,212,255,0.5) !important;
+            transform: translateY(-1px);
+            color: #050a14 !important;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 10rem 2rem 7rem;
+            text-align: center;
+            background: var(--bg-base);
+        }
+
+        /* dot-grid background */
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle, rgba(0,212,255,0.18) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* radial vignette over dots */
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 60% at 50% 50%, transparent 30%, var(--bg-base) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero > * { position: relative; z-index: 2; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0,212,255,0.07);
+            border: 1px solid rgba(0,212,255,0.25);
+            color: var(--cyan);
+            padding: 0.45rem 1.1rem;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 2.25rem;
+            animation: float 3.5s ease-in-out infinite;
+        }
+
+        .hero-badge-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--cyan);
+            animation: pulse-dot 1.8s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+            font-weight: 800;
+            line-height: 1.12;
+            letter-spacing: -0.5px;
+            max-width: 860px;
+            margin: 0 auto 1.5rem;
+            color: var(--white);
+            text-shadow: 0 0 60px rgba(0,212,255,0.12);
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            background: linear-gradient(90deg, var(--cyan), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.75rem;
+            line-height: 1.75;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: var(--cyan);
+            color: #050a14;
+            padding: 0.95rem 2.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 0.2px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 24px rgba(0,212,255,0.35), 0 4px 16px rgba(0,212,255,0.2);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(0,212,255,0.5), 0 8px 24px rgba(0,212,255,0.3);
+        }
+
+        .hero-cta-ghost {
+            display: inline-block;
+            color: var(--cyan);
+            padding: 0.95rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid rgba(0,212,255,0.3);
+            transition: all 0.25s;
+            letter-spacing: 0.2px;
+        }
+
+        .hero-cta-ghost:hover {
+            background: rgba(0,212,255,0.07);
+            border-color: var(--cyan);
+            box-shadow: 0 0 20px rgba(0,212,255,0.2);
+            transform: translateY(-1px);
+        }
+
+        /* ── Trust bar ── */
+        .trust-bar {
+            background: rgba(10,22,40,0.9);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 1.1rem 2rem;
+            text-align: center;
+        }
+
+        .trust-bar p {
+            color: var(--text-muted);
+            font-size: 0.83rem;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .trust-sep {
+            width: 4px; height: 4px;
+            background: var(--cyan);
+            border-radius: 50%;
+            opacity: 0.6;
+            display: inline-block;
+        }
+
+        .trust-bar strong {
+            color: var(--cyan);
+            font-weight: 600;
+        }
+
+        /* ── Sections ── */
+        section { padding: 5.5rem 2rem; }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--cyan);
+            font-family: "SF Mono", "Fira Code", "Courier New", monospace;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 3vw, 2.25rem);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: -0.25px;
+            color: var(--white);
+            line-height: 1.25;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto 3.5rem;
+            line-height: 1.75;
+        }
+
+        /* ── Problem section ── */
+        .problem { background: var(--bg-base); }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .problem-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: -3px 0 0 0 var(--red), 0 0 20px var(--red-dim), inset 0 0 20px rgba(239,68,68,0.03);
+            transition: box-shadow 0.3s;
+        }
+
+        .problem-card:hover {
+            box-shadow: -3px 0 0 0 var(--red), 0 0 32px rgba(239,68,68,0.25), inset 0 0 30px rgba(239,68,68,0.05);
+        }
+
+        .problem-card h3 {
+            font-size: 0.975rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            color: var(--white);
+            letter-spacing: 0.1px;
+        }
+
+        .problem-card p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ── Architecture ── */
+        .how-it-works { background: var(--bg-surface); }
+
+        .architecture-diagram {
+            background: #020912;
+            border: 1px solid rgba(0,212,255,0.2);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 0 auto;
+            max-width: 800px;
+            font-family: "SF Mono", "Fira Code", "Courier New", monospace;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 2;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0,212,255,0.08), inset 0 0 60px rgba(0,212,255,0.03);
+        }
+
+        /* scan line */
+        .architecture-diagram::before {
+            content: "";
+            position: absolute;
+            left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,212,255,0.4), transparent);
+            animation: scan-line 4s linear infinite;
+            pointer-events: none;
+        }
+
+        .arch-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin: 0.4rem 0;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .arch-box {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 6px;
+            padding: 0.45rem 1rem;
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+            white-space: nowrap;
+        }
+
+        .arch-box.highlight {
+            background: rgba(0,212,255,0.08);
+            border: 1px solid rgba(0,212,255,0.4);
+            color: var(--cyan);
+            font-weight: 700;
+            font-size: 0.85rem;
+            box-shadow: 0 0 20px rgba(0,212,255,0.25), inset 0 0 12px rgba(0,212,255,0.06);
+            text-shadow: 0 0 12px rgba(0,212,255,0.6);
+        }
+
+        .arch-arrow {
+            color: rgba(0,212,255,0.4);
+            font-size: 1.1rem;
+        }
+
+        .arch-label {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 0.2rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── Features ── */
+        .features { background: var(--bg-base); }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* animated gradient border card wrapper */
+        .feature-card-wrapper {
+            border-radius: 13px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(0,212,255,0.3), rgba(124,58,237,0.3), rgba(0,212,255,0.1));
+            background-size: 200% 200%;
+            transition: background-position 0.4s;
+        }
+
+        .feature-card-wrapper:hover {
+            animation: border-glow-spin 2.5s linear infinite;
+            box-shadow: 0 0 30px rgba(0,212,255,0.15);
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 12px;
+            padding: 2rem;
+            height: 100%;
+        }
+
+        .feature-icon {
+            width: 2.75rem;
+            height: 2.75rem;
+            background: rgba(0,212,255,0.08);
+            border: 1px solid rgba(0,212,255,0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 1.1rem;
+            box-shadow: 0 0 12px rgba(0,212,255,0.15);
+        }
+
+        .feature-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.55rem;
+            color: var(--white);
+            letter-spacing: 0.1px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.7;
+        }
+
+        /* ── Use Cases ── */
+        .use-cases { background: var(--bg-surface); }
+
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .use-case-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .use-case-card:hover {
+            border-color: rgba(0,212,255,0.35);
+            box-shadow: 0 0 24px rgba(0,212,255,0.1);
+        }
+
+        .use-case-industry {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--cyan);
+            font-family: "SF Mono", "Fira Code", monospace;
+            margin-bottom: 0.6rem;
+        }
+
+        .use-case-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--white);
+            line-height: 1.4;
+        }
+
+        .use-case-card p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.7;
+        }
+
+        /* ── Compliance ── */
+        .compliance { background: var(--bg-base); }
+
+        .compliance-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .compliance-item {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem 1.75rem;
+            text-align: center;
+            min-width: 155px;
+            transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+        }
+
+        .compliance-item:hover {
+            border-color: rgba(0,212,255,0.4);
+            box-shadow: 0 0 20px rgba(0,212,255,0.12);
+            transform: translateY(-2px);
+        }
+
+        .compliance-item strong {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--cyan);
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.2px;
+        }
+
+        .compliance-item span {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* ── Final CTA ── */
+        .final-cta {
+            background: var(--bg-surface);
+            color: var(--white);
+            text-align: center;
+            padding: 7rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(0,212,255,0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+
+        .final-cta::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 20%, var(--bg-surface) 100%);
+            pointer-events: none;
+        }
+
+        .final-cta > * { position: relative; z-index: 1; }
+
+        .final-cta h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 1.1rem;
+            max-width: 660px;
+            margin-left: auto;
+            margin-right: auto;
+            letter-spacing: -0.3px;
+            line-height: 1.2;
+            text-shadow: 0 0 40px rgba(0,212,255,0.15);
+        }
+
+        .final-cta p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 2.75rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.75;
+        }
+
+        /* ── Footer ── */
+        footer {
+            background: var(--bg-base);
+            border-top: 1px solid var(--border-subtle);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.2s;
+        }
+
+        footer a:hover { color: var(--cyan); }
+
+        footer .footer-links { margin-bottom: 0.75rem; }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero { padding: 8rem 1.5rem 5rem; }
+            .hero-cta-group { flex-direction: column; align-items: center; }
+            .architecture-diagram { padding: 1.5rem 1rem; }
+            .arch-row { gap: 0.4rem; }
+            section { padding: 4rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <a href="/" class="nav-logo">
+        <div class="nav-logo-icon">◆</div>
+        <span>AI</span>RiskGuard
+    </a>
+    <ul class="nav-links">
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#use-cases">Use Cases</a></li>
+        <li><a href="mailto:sales@airiskguard.ai" class="nav-cta">Book a Demo</a></li>
+    </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        AI Governance Infrastructure for Regulated Industries
+    </div>
+    <h1>Complete visibility over <em>every AI interaction</em> across your team</h1>
+    <p>AIRiskGuard Gateway sits between your developers and their AI tools — logging, enforcing policy, and generating the audit trail your risk and compliance teams need.</p>
+    <div class="hero-cta-group">
+        <a href="mailto:sales@airiskguard.ai?subject=Demo Request" class="hero-cta">Book a Demo</a>
+        <a href="#how-it-works" class="hero-cta-ghost">See How It Works</a>
+    </div>
+</section>
+
+<!-- Trust bar -->
+<div class="trust-bar">
+    <p>
+        Built for <strong>fintech</strong> <span class="trust-sep"></span>
+        <strong>healthtech</strong> <span class="trust-sep"></span>
+        <strong>legaltech</strong>
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        Maps to <strong>NIST AI RMF</strong> <span class="trust-sep"></span>
+        <strong>EU AI Act</strong> <span class="trust-sep"></span>
+        <strong>ISO 42001</strong> <span class="trust-sep"></span>
+        <strong>SR 11-7</strong>
+    </p>
+</div>
+
+<!-- Problem -->
+<section class="problem" id="problem">
+    <div class="container">
+        <div class="section-label fade-in">// The Problem</div>
+        <h2 class="section-title fade-in">Your team is using AI. You have no idea what they're sending.</h2>
+        <p class="section-subtitle fade-in">Every developer on your team makes hundreds of AI API calls a day. None of it is visible to the risk function — until something goes wrong.</p>
+
+        <div class="problem-grid">
+            <div class="problem-card fade-in">
+                <h3>No audit trail</h3>
+                <p>When a regulator asks what data was sent to an AI model last quarter, the answer is: "We don't know." That's not acceptable in a regulated environment.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <h3>PII and secrets in prompts</h3>
+                <p>Developers routinely paste customer data, credentials, and internal documents into AI tools. It happens daily. No one catches it in real time.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <h3>No policy enforcement</h3>
+                <p>You have an AI usage policy. You have no way to enforce it. Model allowlists, data classification rules, and output controls exist only on paper.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <h3>Blind spot for model risk</h3>
+                <p>Your model risk manager has frameworks for traditional models. AI coding tools and LLM-powered features sit entirely outside those frameworks.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-it-works" id="how-it-works">
+    <div class="container">
+        <div class="section-label fade-in">// Architecture</div>
+        <h2 class="section-title fade-in">A proxy that sits in the flow — not bolted on after</h2>
+        <p class="section-subtitle fade-in">AIRiskGuard Gateway routes AI API calls through a local proxy on each developer's machine. Nothing changes in their workflow. Everything becomes visible to you.</p>
+
+        <div class="architecture-diagram fade-in">
+            <div class="arch-row">
+                <div class="arch-box">Claude Code</div>
+                <div class="arch-box">Cursor</div>
+                <div class="arch-box">Copilot</div>
+                <div class="arch-box">Custom App</div>
+            </div>
+            <div class="arch-row">
+                <div class="arch-arrow">↓</div>
+            </div>
+            <div class="arch-row">
+                <div class="arch-box highlight">◆ AIRiskGuard Gateway</div>
+            </div>
+            <div class="arch-label">Log · Inspect · Enforce · Redact</div>
+            <div class="arch-row">
+                <div class="arch-arrow">↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓</div>
+            </div>
+            <div class="arch-row">
+                <div class="arch-box">Anthropic · OpenAI · Azure</div>
+                <div class="arch-box highlight">Policy Server + Dashboard</div>
+            </div>
+            <div class="arch-label">AI Providers &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Risk &amp; Compliance Team</div>
+        </div>
+    </div>
+</section>
+
+<!-- Features -->
+<section class="features" id="features">
+    <div class="container">
+        <div class="section-label fade-in">// Capabilities</div>
+        <h2 class="section-title fade-in">Everything your risk function needs</h2>
+        <p class="section-subtitle fade-in">Built by people who understand model risk management, not just application security.</p>
+
+        <div class="features-grid">
+            <div class="feature-card-wrapper fade-in">
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Immutable Audit Logs</h3>
+                    <p>Every prompt, response, model, latency, and cost — captured and stored with tamper-evident logging. Searchable, exportable, SIEM-ready.</p>
+                </div>
+            </div>
+            <div class="feature-card-wrapper fade-in">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Real-Time PII Redaction</h3>
+                    <p>Detects and redacts personally identifiable information before it leaves your network — names, account numbers, health data, credentials.</p>
+                </div>
+            </div>
+            <div class="feature-card-wrapper fade-in">
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Centralized Policy Enforcement</h3>
+                    <p>Push model allowlists, data classification rules, and output controls to every developer machine from a single policy server. No manual updates.</p>
+                </div>
+            </div>
+            <div class="feature-card-wrapper fade-in">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Risk Dashboard</h3>
+                    <p>Usage patterns, policy violations, cost by team, and model distribution — a live view for risk managers and eng leads alike.</p>
+                </div>
+            </div>
+            <div class="feature-card-wrapper fade-in">
+                <div class="feature-card">
+                    <div class="feature-icon">🔑</div>
+                    <h3>API Key Vaulting</h3>
+                    <p>Real provider keys stay server-side. Developers get gateway-issued tokens. No more API keys scattered across developer machines.</p>
+                </div>
+            </div>
+            <div class="feature-card-wrapper fade-in">
+                <div class="feature-card">
+                    <div class="feature-icon">📁</div>
+                    <h3>Compliance Evidence Export</h3>
+                    <p>Generate audit-ready evidence packages for EU AI Act, SOC 2, ISO 42001, and SR 11-7 model risk reviews — on demand, not scrambled together at audit time.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Use Cases -->
+<section class="use-cases" id="use-cases">
+    <div class="container">
+        <div class="section-label fade-in">// Use Cases</div>
+        <h2 class="section-title fade-in">Built for teams with real compliance obligations</h2>
+        <p class="section-subtitle fade-in">Not a developer toy. Infrastructure for organizations where AI governance is a requirement, not a nice-to-have.</p>
+
+        <div class="use-cases-grid">
+            <div class="use-case-card fade-in">
+                <div class="use-case-industry">Fintech</div>
+                <h3>SR 11-7 model risk coverage for LLMs</h3>
+                <p>Your model risk policy covers traditional ML. Regulators are starting to ask the same questions about LLMs. AIRiskGuard bridges that gap with the logging and controls your MRM team can actually use.</p>
+            </div>
+            <div class="use-case-card fade-in">
+                <div class="use-case-industry">Healthtech</div>
+                <h3>HIPAA-safe AI development</h3>
+                <p>Prevent PHI from reaching external AI providers. Enforce approved model lists. Generate the documentation your privacy officer needs when developers use AI to build patient-facing features.</p>
+            </div>
+            <div class="use-case-card fade-in">
+                <div class="use-case-industry">Legaltech</div>
+                <h3>Client data stays client data</h3>
+                <p>Privilege and confidentiality obligations don't pause when developers use AI. AIRiskGuard ensures client matter data isn't passed to third-party models without detection and logging.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Compliance -->
+<section class="compliance" id="compliance">
+    <div class="container">
+        <div class="section-label fade-in">// Standards</div>
+        <h2 class="section-title fade-in">Maps to the frameworks your auditors use</h2>
+        <p class="section-subtitle fade-in">AIRiskGuard's controls and evidence outputs are designed around the frameworks regulators and auditors already expect.</p>
+
+        <div class="compliance-grid">
+            <div class="compliance-item fade-in">
+                <strong>EU AI Act</strong>
+                <span>Articles 9, 10, 13, 14, 15</span>
+            </div>
+            <div class="compliance-item fade-in">
+                <strong>SR 11-7</strong>
+                <span>Model Risk Management</span>
+            </div>
+            <div class="compliance-item fade-in">
+                <strong>NIST AI RMF</strong>
+                <span>Govern · Map · Measure · Manage</span>
+            </div>
+            <div class="compliance-item fade-in">
+                <strong>ISO/IEC 42001</strong>
+                <span>AI Management System</span>
+            </div>
+            <div class="compliance-item fade-in">
+                <strong>SOC 2</strong>
+                <span>Trust Service Criteria</span>
+            </div>
+            <div class="compliance-item fade-in">
+                <strong>OWASP LLM Top 10</strong>
+                <span>2025 Edition</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta">
+    <h2 class="fade-in">Get visibility before your auditor asks for it.</h2>
+    <p class="fade-in">Talk to us about what your risk and compliance team actually needs. We'll show you how Gateway fits in.</p>
+    <div class="hero-cta-group fade-in">
+        <a href="mailto:sales@airiskguard.ai?subject=Demo Request" class="hero-cta">Book a Demo</a>
+        <a href="mailto:sales@airiskguard.ai?subject=Quick Question" class="hero-cta-ghost">Send Us a Question</a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-links">
+        <a href="https://docs.airiskguard.ai">Documentation</a>
+        <a href="https://github.com/gobeyondfj-cmd/airiskguard">GitHub</a>
+        <a href="mailto:sales@airiskguard.ai">sales@airiskguard.ai</a>
+    </div>
+    <p>&copy; 2026 AIRiskGuard · airiskguard.ai</p>
+</footer>
+
+<script>
+// Intersection Observer for fade-in animations
+(function() {
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+
+    document.querySelectorAll(".fade-in").forEach(function(el, i) {
+        // stagger siblings slightly
+        el.style.transitionDelay = (i % 4) * 0.07 + "s";
+        observer.observe(el);
+    });
+})();
+</script>
+
+</body>
+</html>
