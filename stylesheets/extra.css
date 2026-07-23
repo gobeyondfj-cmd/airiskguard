@@ -1,0 +1,55 @@
+/* airiskguard site customizations */
+
+:root {
+  --md-primary-fg-color: #0d8a72;
+  --md-primary-bg-color: #ffffff;
+  --md-accent-fg-color: #2196c4;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #26a69a;
+  --md-accent-fg-color: #4fc3f7;
+}
+
+/* Homepage hero adjustments */
+.hero h1 {
+  background: linear-gradient(135deg, #1976b8, #2e9e5a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-md-color-scheme="slate"] .hero h1 {
+  background: linear-gradient(135deg, #4fc3f7, #66bb6a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Feature cards hover */
+.feature-card {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.feature-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+[data-md-color-scheme="slate"] .feature-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Standard document: control tables */
+.md-typeset table:not([class]) th {
+  white-space: nowrap;
+}
+
+/* Tighter table styling for control index */
+.md-typeset table:not([class]) td {
+  font-size: 0.85rem;
+}
+
+/* Nav tab styling */
+.md-tabs__link {
+  font-weight: 500;
+}
