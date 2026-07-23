@@ -158,28 +158,36 @@
     <div class="step">
         <div class="step-num">2</div>
         <div>
+            <p>Validate your license key</p>
+            <pre>airiskguard-gateway license YOUR-LICENSE-KEY</pre>
+            <span class="hint">Should print: License valid.</span>
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-num">3</div>
+        <div>
             <p>Install the CA certificate and start the proxy</p>
             <pre>airiskguard-gateway install-cert
 airiskguard-gateway start</pre>
         </div>
     </div>
     <div class="step">
-        <div class="step-num">3</div>
+        <div class="step-num">4</div>
         <div>
             <p>Start the policy server with your license key</p>
             <pre id="docker-cmd">AIRISKGUARD_LICENSE=YOUR_KEY docker compose up -d</pre>
-            <span class="hint">Clone the repo first: git clone https://github.com/gobeyondfj-cmd/airiskguard-gateway</span>
+            <span class="hint">Clone first: git clone https://github.com/gobeyondfj-cmd/airiskguard-gateway</span>
         </div>
     </div>
     <div class="step">
-        <div class="step-num">4</div>
+        <div class="step-num">5</div>
         <div>
             <p>Open the cost dashboard</p>
             <pre>open http://localhost:8000/dashboard</pre>
         </div>
     </div>
     <div class="step">
-        <div class="step-num">5</div>
+        <div class="step-num">6</div>
         <div>
             <p>Set these in your shell</p>
             <pre>export HTTPS_PROXY=http://127.0.0.1:8080
@@ -187,6 +195,9 @@ export NODE_EXTRA_CA_CERTS=~/.config/airiskguard-gateway/mitmproxy-ca-cert.pem</
         </div>
     </div>
 </div>
+
+<!-- Hidden element for license file content (populated by JS) -->
+<pre id="license-file-content" style="display:none"></pre>
 
 <div class="actions">
     <a href="https://github.com/gobeyondfj-cmd/airiskguard-gateway" target="_blank" class="btn btn-primary">View on GitHub</a>
@@ -216,12 +227,20 @@ async function loadLicenseKey() {
         document.getElementById('docker-cmd').textContent =
             `AIRISKGUARD_LICENSE=${data.license_key} docker compose up -d`;
 
+        // Build license file content for easy copy
+        const licenseFileContent = `subscription_id=${data.subscription_id}\nlicense_key=${data.license_key}`;
+        document.getElementById('license-file-content').textContent = licenseFileContent;
+
         section.innerHTML = `
             <div class="key-box">
                 <span class="key-text" id="key-value">${data.license_key}</span>
                 <button class="copy-btn" onclick="copyKey()">Copy</button>
             </div>
-            <p class="key-note">Save this key. If you lose it, visit this page again with the same session link or email support.</p>
+            <p class="key-note" style="margin-bottom:0.75rem">Save this key. Revisit this page with the same URL to retrieve it again.</p>
+            <p class="key-note">
+                Or validate it now:
+                <code style="color:#00d4ff;background:rgba(0,212,255,0.08);padding:0.1rem 0.5rem;border-radius:4px;font-size:0.8rem">airiskguard-gateway license ${data.license_key}</code>
+            </p>
         `;
     } catch (err) {
         section.innerHTML = `<div class="error-box">Could not retrieve your key: ${err.message}.<br>Email <a href="mailto:sales@airiskguard.ai" style="color:#f87171">sales@airiskguard.ai</a> and we'll sort it out.</div>`;
