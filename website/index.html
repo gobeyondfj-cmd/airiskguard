@@ -953,8 +953,10 @@
         <strong>Llama</strong> <span class="trust-sep"></span>
         <strong>Mistral</strong> <span class="trust-sep"></span>
         <strong>Ollama</strong> <span class="trust-sep"></span>
+        <strong>vLLM</strong> <span class="trust-sep"></span>
+        <strong>LiteLLM</strong> <span class="trust-sep"></span>
         <strong>Azure OpenAI</strong> <span class="trust-sep"></span>
-        <strong>any OpenAI-compatible API</strong>
+        <strong>any OpenAI-compatible endpoint</strong>
     </p>
 </div>
 
@@ -1023,7 +1025,7 @@
             <div class="fade-in" style="text-align:center">
                 <div style="font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-bottom:0.75rem">Step 2</div>
                 <p style="font-size:0.9rem;color:var(--text-primary);margin-bottom:0.5rem;font-weight:600">Set one env var</p>
-                <div class="architecture-diagram" style="padding:1rem;text-align:left;font-size:0.78rem">export HTTPS_PROXY=<br>&nbsp;&nbsp;http://127.0.0.1:8080<br>&nbsp;</div>
+                <div class="architecture-diagram" style="padding:1rem;text-align:left;font-size:0.78rem">export HTTPS_PROXY=http://127.0.0.1:8080<br>export NODE_EXTRA_CA_CERTS=~/.config/<br>&nbsp;&nbsp;airiskguard-gateway/mitmproxy-ca-cert.pem</div>
             </div>
             <div class="fade-in" style="text-align:center">
                 <div style="font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-bottom:0.75rem">Step 3 (optional)</div>
@@ -1080,18 +1082,18 @@
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;text-align:center">
             <div class="fade-in">
                 <div style="font-size:2.5rem;font-weight:800;color:var(--cyan);margin-bottom:0.25rem">94%</div>
-                <div style="font-size:0.9rem;color:var(--text-secondary)">cost reduction routing gpt-4o → gpt-4o-mini</div>
+                <div style="font-size:0.9rem;color:var(--text-secondary)">cheaper — gpt-4o-mini vs gpt-4o at same token count</div>
             </div>
             <div class="fade-in">
-                <div style="font-size:2.5rem;font-weight:800;color:var(--cyan);margin-bottom:0.25rem">2 min</div>
+                <div style="font-size:2.5rem;font-weight:800;color:var(--cyan);margin-bottom:0.25rem">&lt;5 min</div>
                 <div style="font-size:0.9rem;color:var(--text-secondary)">install to first intercepted call</div>
             </div>
             <div class="fade-in">
-                <div style="font-size:2.5rem;font-weight:800;color:var(--cyan);margin-bottom:0.25rem">0</div>
-                <div style="font-size:0.9rem;color:var(--text-secondary)">changes to developer workflow required</div>
+                <div style="font-size:2.5rem;font-weight:800;color:var(--cyan);margin-bottom:0.25rem">1</div>
+                <div style="font-size:0.9rem;color:var(--text-secondary)">env var to set — HTTPS_PROXY. That's it.</div>
             </div>
             <div class="fade-in">
-                <div style="font-size:2.5rem;font-weight:800;color:var(--cyan);margin-bottom:0.25rem">15+</div>
+                <div style="font-size:2.5rem;font-weight:800;color:var(--cyan);margin-bottom:0.25rem">20+</div>
                 <div style="font-size:0.9rem;color:var(--text-secondary)">AI models with built-in pricing data</div>
             </div>
         </div>
@@ -1212,7 +1214,7 @@ async function startCheckout() {
 <!-- Footer -->
 <footer>
     <div class="footer-links">
-        <a href="https://docs.airiskguard.ai">Documentation</a>
+        <a href="https://github.com/gobeyondfj-cmd/airiskguard-gateway#readme" target="_blank">Documentation</a>
         <a href="https://github.com/gobeyondfj-cmd/airiskguard-gateway" target="_blank">GitHub</a>
         <a href="mailto:sales@airiskguard.ai">sales@airiskguard.ai</a>
     </div>
