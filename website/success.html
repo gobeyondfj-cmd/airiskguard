@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to AIRiskGuard Gateway Team</title>
+    <title>Your License Key — AIRiskGuard Gateway</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -17,146 +17,109 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            padding: 4rem 1.5rem;
+            padding: 3rem 1.5rem;
             -webkit-font-smoothing: antialiased;
         }
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: white;
-            text-decoration: none;
-            margin-bottom: 3rem;
+            display: flex; align-items: center; gap: 0.5rem;
+            font-size: 1.1rem; font-weight: 800; color: white;
+            text-decoration: none; margin-bottom: 3rem;
         }
         .logo-icon {
             width: 28px; height: 28px;
             background: linear-gradient(135deg, #00d4ff, #7c3aed);
-            border-radius: 6px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.8rem;
-            box-shadow: 0 0 16px rgba(0,212,255,0.4);
+            border-radius: 6px; display: flex;
+            align-items: center; justify-content: center;
+            font-size: 0.8rem; box-shadow: 0 0 16px rgba(0,212,255,0.4);
         }
-        .check-circle {
-            width: 72px; height: 72px;
-            background: rgba(0,212,255,0.1);
-            border: 2px solid rgba(0,212,255,0.4);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 2rem;
-            margin: 0 auto 1.5rem;
-            box-shadow: 0 0 32px rgba(0,212,255,0.2);
-        }
-        h1 {
-            font-size: 2rem;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.5px;
-        }
-        .sub {
-            color: #7d8fa8;
-            text-align: center;
-            margin-bottom: 3rem;
-            font-size: 1rem;
-        }
+        .check { font-size: 3rem; margin-bottom: 1rem; }
+        h1 { font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 0.5rem; letter-spacing: -0.5px; }
+        .sub { color: #7d8fa8; text-align: center; margin-bottom: 2.5rem; font-size: 0.95rem; max-width: 480px; }
         .card {
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(0,212,255,0.15);
-            border-radius: 12px;
-            padding: 2rem;
-            max-width: 640px;
-            width: 100%;
-            margin-bottom: 1.5rem;
+            border-radius: 12px; padding: 2rem;
+            max-width: 600px; width: 100%; margin-bottom: 1.5rem;
         }
-        .card h2 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #00d4ff;
-            margin-bottom: 1.25rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .card-title {
+            font-size: 0.75rem; font-weight: 700; letter-spacing: 1px;
+            text-transform: uppercase; color: #00d4ff; margin-bottom: 1rem;
         }
-        .step {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.25rem;
-            align-items: flex-start;
+        /* License key display */
+        .key-box {
+            background: #020912;
+            border: 1px solid rgba(0,212,255,0.25);
+            border-radius: 8px; padding: 1.25rem 1.5rem;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 1rem; margin-bottom: 0.75rem;
         }
-        .step:last-child { margin-bottom: 0; }
-        .step-num {
-            width: 24px; height: 24px;
-            min-width: 24px;
+        .key-text {
+            font-family: "SF Mono", "Fira Code", monospace;
+            font-size: 1.1rem; font-weight: 700;
+            color: #00d4ff; letter-spacing: 0.5px;
+            word-break: break-all;
+        }
+        .copy-btn {
             background: rgba(0,212,255,0.1);
             border: 1px solid rgba(0,212,255,0.3);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #00d4ff;
+            color: #00d4ff; border-radius: 6px;
+            padding: 0.4rem 0.875rem; font-size: 0.8rem;
+            font-weight: 600; cursor: pointer; white-space: nowrap;
+            transition: all 0.2s; font-family: inherit;
         }
-        .step-body { flex: 1; }
-        .step-body p {
-            font-size: 0.9rem;
-            color: #e2e8f0;
-            margin-bottom: 0.5rem;
+        .copy-btn:hover { background: rgba(0,212,255,0.2); }
+        .key-note { font-size: 0.8rem; color: #7d8fa8; }
+        /* Steps */
+        .step { display: flex; gap: 1rem; margin-bottom: 1.25rem; align-items: flex-start; }
+        .step:last-child { margin-bottom: 0; }
+        .step-num {
+            width: 24px; height: 24px; min-width: 24px;
+            background: rgba(0,212,255,0.1);
+            border: 1px solid rgba(0,212,255,0.3);
+            border-radius: 50%; display: flex;
+            align-items: center; justify-content: center;
+            font-size: 0.75rem; font-weight: 700; color: #00d4ff;
         }
-        .step-body .hint {
-            font-size: 0.8rem;
-            color: #7d8fa8;
-        }
+        .step p { font-size: 0.9rem; color: #e2e8f0; margin-bottom: 0.4rem; }
+        .step .hint { font-size: 0.8rem; color: #7d8fa8; }
         pre {
             background: #020912;
             border: 1px solid rgba(0,212,255,0.12);
-            border-radius: 8px;
-            padding: 0.875rem 1rem;
+            border-radius: 8px; padding: 0.875rem 1rem;
             font-family: "SF Mono", "Fira Code", monospace;
-            font-size: 0.8rem;
-            color: #00d4ff;
-            overflow-x: auto;
-            margin-top: 0.5rem;
-            line-height: 1.6;
+            font-size: 0.8rem; color: #00d4ff;
+            overflow-x: auto; margin-top: 0.5rem; line-height: 1.6;
         }
+        .actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1.5rem; }
         .btn {
-            display: inline-block;
-            padding: 0.75rem 2rem;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            text-decoration: none;
-            transition: all 0.2s;
-            cursor: pointer;
-            border: none;
+            display: inline-block; padding: 0.75rem 2rem;
+            border-radius: 8px; font-weight: 700; font-size: 0.9rem;
+            text-decoration: none; transition: all 0.2s; cursor: pointer; border: none;
         }
         .btn-primary {
-            background: #00d4ff;
-            color: #050a14;
+            background: #00d4ff; color: #050a14;
             box-shadow: 0 0 20px rgba(0,212,255,0.3);
         }
         .btn-primary:hover { box-shadow: 0 0 32px rgba(0,212,255,0.5); transform: translateY(-1px); }
         .btn-ghost {
-            background: transparent;
-            color: #00d4ff;
+            background: transparent; color: #00d4ff;
             border: 1px solid rgba(0,212,255,0.3);
         }
         .btn-ghost:hover { background: rgba(0,212,255,0.06); }
-        .actions {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 1rem;
+        /* Loading state */
+        .loading { text-align: center; color: #7d8fa8; padding: 2rem; }
+        .spinner {
+            width: 32px; height: 32px; border: 2px solid rgba(0,212,255,0.15);
+            border-top-color: #00d4ff; border-radius: 50%;
+            animation: spin 0.8s linear infinite; margin: 0 auto 1rem;
         }
-        .support {
-            margin-top: 2.5rem;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #7d8fa8;
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .error-box {
+            background: rgba(239,68,68,0.08);
+            border: 1px solid rgba(239,68,68,0.25);
+            border-radius: 8px; padding: 1rem 1.25rem;
+            color: #f87171; font-size: 0.9rem;
         }
-        .support a { color: #00d4ff; text-decoration: none; }
     </style>
 </head>
 <body>
@@ -166,121 +129,117 @@
     AIRiskGuard
 </a>
 
-<div class="check-circle">✓</div>
-<h1>You're in.</h1>
-<p class="sub">Check your email for your receipt. Get the gateway running in under 5 minutes.</p>
+<div class="check">✓</div>
+<h1>Payment confirmed.</h1>
+<p class="sub">Your Team license key is below. Save it somewhere safe — you'll need it to activate the policy server.</p>
 
-<!-- Step 1: Install -->
+<!-- License key card -->
 <div class="card">
-    <h2>⬇ Step 1 — Install the gateway</h2>
-    <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-            <p>Install the gateway package</p>
-            <pre>pip install airiskguard-gateway</pre>
-        </div>
-    </div>
-    <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-            <p>Generate and install the CA certificate</p>
-            <pre>airiskguard-gateway install-cert</pre>
-            <span class="hint">This lets the proxy intercept HTTPS traffic. Runs once.</span>
-        </div>
-    </div>
-    <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-            <p>Start the gateway</p>
-            <pre>airiskguard-gateway start</pre>
-        </div>
-    </div>
-    <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-body">
-            <p>Set these in your shell (add to ~/.zshrc or ~/.bashrc)</p>
-            <pre>export HTTPS_PROXY=http://127.0.0.1:8080
-export NODE_EXTRA_CA_CERTS=~/.config/airiskguard-gateway/mitmproxy-ca-cert.pem</pre>
-            <span class="hint">NODE_EXTRA_CA_CERTS is required for Claude Code and other Node-based AI tools.</span>
+    <div class="card-title">Your License Key</div>
+    <div id="key-section">
+        <div class="loading">
+            <div class="spinner"></div>
+            Retrieving your license key...
         </div>
     </div>
 </div>
 
-<!-- Step 2: Policy server (Team tier) -->
+<!-- Setup steps -->
 <div class="card">
-    <h2>🖥 Step 2 — Start the Team policy server</h2>
+    <div class="card-title">Get started in 5 minutes</div>
+
     <div class="step">
         <div class="step-num">1</div>
-        <div class="step-body">
-            <p>Install with server extras</p>
+        <div>
+            <p>Install the gateway</p>
             <pre>pip install "airiskguard-gateway[server]"</pre>
         </div>
     </div>
     <div class="step">
         <div class="step-num">2</div>
-        <div class="step-body">
-            <p>Start with Docker Compose (PostgreSQL + policy server)</p>
-            <pre>git clone https://github.com/gobeyondfj-cmd/airiskguard-gateway
-cd airiskguard-gateway
-docker compose up -d</pre>
+        <div>
+            <p>Install the CA certificate and start the proxy</p>
+            <pre>airiskguard-gateway install-cert
+airiskguard-gateway start</pre>
         </div>
     </div>
     <div class="step">
         <div class="step-num">3</div>
-        <div class="step-body">
-            <p>Open the dashboard</p>
-            <pre>open http://localhost:8000/dashboard</pre>
+        <div>
+            <p>Start the policy server with your license key</p>
+            <pre id="docker-cmd">AIRISKGUARD_LICENSE=YOUR_KEY docker compose up -d</pre>
+            <span class="hint">Clone the repo first: git clone https://github.com/gobeyondfj-cmd/airiskguard-gateway</span>
         </div>
     </div>
     <div class="step">
         <div class="step-num">4</div>
-        <div class="step-body">
-            <p>Connect the gateway to your policy server (in config.yaml)</p>
-            <pre>policy_server:
-  url: "http://your-server:8000"
-  api_key: "your-team-api-key"</pre>
+        <div>
+            <p>Open the cost dashboard</p>
+            <pre>open http://localhost:8000/dashboard</pre>
         </div>
     </div>
-</div>
-
-<!-- Step 3: Routing -->
-<div class="card">
-    <h2>⚡ Step 3 — Add routing rules (optional)</h2>
     <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-            <p>Edit <code style="color:#00d4ff">~/.config/airiskguard-gateway/config.yaml</code></p>
-            <pre>routing:
-  rules:
-    # Route PII to your internal model
-    - match: contains_pii
-      action: route_to
-      destination: internal_llm
-    # Downgrade gpt-4 requests to cheaper model
-    - match: model_pattern
-      model_pattern: "gpt-4*"
-      action: route_to
-      destination: gpt_4o_mini
-  destinations:
-    internal_llm:
-      provider: ollama
-      base_url: http://localhost:11434
-      model: llama3.2
-    gpt_4o_mini:
-      provider: openai
-      model: gpt-4o-mini</pre>
+        <div class="step-num">5</div>
+        <div>
+            <p>Set these in your shell</p>
+            <pre>export HTTPS_PROXY=http://127.0.0.1:8080
+export NODE_EXTRA_CA_CERTS=~/.config/airiskguard-gateway/mitmproxy-ca-cert.pem</pre>
         </div>
     </div>
 </div>
 
 <div class="actions">
-    <a href="https://github.com/gobeyondfj-cmd/airiskguard-gateway" class="btn btn-primary">View on GitHub</a>
+    <a href="https://github.com/gobeyondfj-cmd/airiskguard-gateway" target="_blank" class="btn btn-primary">View on GitHub</a>
     <a href="mailto:sales@airiskguard.ai" class="btn btn-ghost">Email Support</a>
 </div>
 
-<p class="support">
-    Questions? Email <a href="mailto:sales@airiskguard.ai">sales@airiskguard.ai</a> — we reply within 24 hours.
-</p>
+<script>
+async function loadLicenseKey() {
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('session_id');
+    const section = document.getElementById('key-section');
+
+    if (!sessionId) {
+        section.innerHTML = `<div class="error-box">No session ID found. If you just paid, email <a href="mailto:sales@airiskguard.ai" style="color:#f87171">sales@airiskguard.ai</a> and we'll send your key manually.</div>`;
+        return;
+    }
+
+    try {
+        const res = await fetch(`/api/license?session_id=${sessionId}`);
+        const data = await res.json();
+
+        if (!res.ok || !data.license_key) {
+            throw new Error(data.error || 'Failed to retrieve key');
+        }
+
+        // Update docker command with actual key
+        document.getElementById('docker-cmd').textContent =
+            `AIRISKGUARD_LICENSE=${data.license_key} docker compose up -d`;
+
+        section.innerHTML = `
+            <div class="key-box">
+                <span class="key-text" id="key-value">${data.license_key}</span>
+                <button class="copy-btn" onclick="copyKey()">Copy</button>
+            </div>
+            <p class="key-note">Save this key. If you lose it, visit this page again with the same session link or email support.</p>
+        `;
+    } catch (err) {
+        section.innerHTML = `<div class="error-box">Could not retrieve your key: ${err.message}.<br>Email <a href="mailto:sales@airiskguard.ai" style="color:#f87171">sales@airiskguard.ai</a> and we'll sort it out.</div>`;
+    }
+}
+
+function copyKey() {
+    const key = document.getElementById('key-value')?.textContent;
+    if (!key) return;
+    navigator.clipboard.writeText(key).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
+}
+
+loadLicenseKey();
+</script>
 
 </body>
 </html>
