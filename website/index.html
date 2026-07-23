@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIRiskGuard Gateway — AI Traffic Management for Developer Teams</title>
-    <meta name="description" content="Route the right query to the right model at the right cost. Local HTTPS proxy that sits between your AI tools and AI provider APIs. Smart routing, cost savings, PII protection, model allowlist.">
+    <title>AIRiskGuard Gateway — AI traffic management for developer teams</title>
+    <meta name="description" content="Cut your AI bill. Route expensive queries to cheaper models automatically. Block secrets before they leave the machine. Free open-source proxy + Team dashboard.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -925,12 +925,12 @@
 <section class="hero">
     <div class="hero-badge">
         <div class="hero-badge-dot"></div>
-        AI Governance Infrastructure for Regulated Industries
+        Open-source AI gateway · MIT license
     </div>
-    <h1>Complete visibility over <em>every AI interaction</em> across your team</h1>
-    <p>AIRiskGuard Gateway sits between your developers and their AI tools — logging, enforcing policy, and generating the audit trail your risk and compliance teams need.</p>
+    <h1>Cut your AI bill.<br><em>Route smarter. Ship faster.</em></h1>
+    <p>A local proxy that sits between your developers and AI providers. Route expensive queries to cheaper models automatically. Block secrets before they leave the machine.</p>
     <div class="hero-cta-group">
-        <a href="mailto:sales@airiskguard.ai?subject=Demo Request" class="hero-cta">Book a Demo</a>
+        <a href="https://github.com/gobeyondfj-cmd/airiskguard-gateway" target="_blank" class="hero-cta">Install Free</a>
         <a href="#how-it-works" class="hero-cta-ghost">See How It Works</a>
     </div>
 </section>
@@ -938,14 +938,15 @@
 <!-- Trust bar -->
 <div class="trust-bar">
     <p>
-        Built for <strong>fintech</strong> <span class="trust-sep"></span>
-        <strong>healthtech</strong> <span class="trust-sep"></span>
-        <strong>legaltech</strong>
+        Works with <strong>Claude Code</strong> <span class="trust-sep"></span>
+        <strong>Cursor</strong> <span class="trust-sep"></span>
+        <strong>GitHub Copilot</strong> <span class="trust-sep"></span>
+        <strong>any AI tool</strong>
         &nbsp;&nbsp;·&nbsp;&nbsp;
-        Maps to <strong>NIST AI RMF</strong> <span class="trust-sep"></span>
-        <strong>EU AI Act</strong> <span class="trust-sep"></span>
-        <strong>ISO 42001</strong> <span class="trust-sep"></span>
-        <strong>SR 11-7</strong>
+        Supports <strong>Anthropic</strong> <span class="trust-sep"></span>
+        <strong>OpenAI</strong> <span class="trust-sep"></span>
+        <strong>Azure</strong> <span class="trust-sep"></span>
+        <strong>Ollama</strong>
     </p>
 </div>
 
@@ -953,25 +954,25 @@
 <section class="problem" id="problem">
     <div class="container">
         <div class="section-label fade-in">// The Problem</div>
-        <h2 class="section-title fade-in">Your team is using AI. You have no idea what they're sending.</h2>
-        <p class="section-subtitle fade-in">Every developer on your team makes hundreds of AI API calls a day. None of it is visible to the risk function — until something goes wrong.</p>
+        <h2 class="section-title fade-in">Your team is burning money on AI. You can't see it happening.</h2>
+        <p class="section-subtitle fade-in">Every developer makes hundreds of AI API calls a day. No routing. No visibility. No control over what gets sent where.</p>
 
         <div class="problem-grid">
             <div class="problem-card fade-in">
-                <h3>No audit trail</h3>
-                <p>When a regulator asks what data was sent to an AI model last quarter, the answer is: "We don't know." That's not acceptable in a regulated environment.</p>
+                <h3>GPT-4o for everything</h3>
+                <p>60% of your team's queries are simple — autocomplete, code explanation, quick lookups. You're paying $10/M tokens when $0.15/M would do the same job.</p>
             </div>
             <div class="problem-card fade-in">
                 <h3>PII and secrets in prompts</h3>
-                <p>Developers routinely paste customer data, credentials, and internal documents into AI tools. It happens daily. No one catches it in real time.</p>
+                <p>Developers paste customer data, API keys, and internal documents into AI tools daily. None of it is caught before it reaches an external API.</p>
             </div>
             <div class="problem-card fade-in">
-                <h3>No policy enforcement</h3>
-                <p>You have an AI usage policy. You have no way to enforce it. Model allowlists, data classification rules, and output controls exist only on paper.</p>
+                <h3>Zero cost visibility</h3>
+                <p>You get one monthly invoice from Anthropic or OpenAI. You have no idea which team, which tool, or which model is responsible for the bill.</p>
             </div>
             <div class="problem-card fade-in">
-                <h3>Blind spot for model risk</h3>
-                <p>Your model risk manager has frameworks for traditional models. AI coding tools and LLM-powered features sit entirely outside those frameworks.</p>
+                <h3>No routing control</h3>
+                <p>Sensitive data — financial records, health data, client files — should never reach an external model. Right now it does, and nobody knows.</p>
             </div>
         </div>
     </div>
@@ -980,32 +981,47 @@
 <!-- How It Works -->
 <section class="how-it-works" id="how-it-works">
     <div class="container">
-        <div class="section-label fade-in">// Architecture</div>
-        <h2 class="section-title fade-in">A proxy that sits in the flow — not bolted on after</h2>
-        <p class="section-subtitle fade-in">AIRiskGuard Gateway routes AI API calls through a local proxy on each developer's machine. Nothing changes in their workflow. Everything becomes visible to you.</p>
+        <div class="section-label fade-in">// How It Works</div>
+        <h2 class="section-title fade-in">One proxy. Full control.</h2>
+        <p class="section-subtitle fade-in">Install in two minutes. Set one environment variable. Every AI call is now visible, routable, and logged.</p>
 
         <div class="architecture-diagram fade-in">
             <div class="arch-row">
                 <div class="arch-box">Claude Code</div>
                 <div class="arch-box">Cursor</div>
                 <div class="arch-box">Copilot</div>
-                <div class="arch-box">Custom App</div>
+                <div class="arch-box">Your App</div>
             </div>
-            <div class="arch-row">
-                <div class="arch-arrow">↓</div>
-            </div>
+            <div class="arch-row"><div class="arch-arrow">↓</div></div>
             <div class="arch-row">
                 <div class="arch-box highlight">◆ AIRiskGuard Gateway</div>
             </div>
-            <div class="arch-label">Log · Inspect · Enforce · Redact</div>
+            <div class="arch-label">Scan · Route · Log · Block</div>
+            <div class="arch-row"><div class="arch-arrow">↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓</div></div>
             <div class="arch-row">
-                <div class="arch-arrow">↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓</div>
+                <div class="arch-box">Anthropic · OpenAI</div>
+                <div class="arch-box">Azure · Private</div>
+                <div class="arch-box highlight">Cost Dashboard</div>
             </div>
-            <div class="arch-row">
-                <div class="arch-box">Anthropic · OpenAI · Azure</div>
-                <div class="arch-box highlight">Policy Server + Dashboard</div>
+            <div class="arch-label">Expensive model &nbsp;&nbsp;&nbsp; Sensitive data &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Team tier</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:3rem">
+            <div class="fade-in" style="text-align:center">
+                <div style="font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-bottom:0.75rem">Step 1</div>
+                <p style="font-size:0.9rem;color:var(--text-primary);margin-bottom:0.5rem;font-weight:600">Install and start</p>
+                <div class="architecture-diagram" style="padding:1rem;text-align:left;font-size:0.78rem">pip install airiskguard-gateway<br>airiskguard-gateway install-cert<br>airiskguard-gateway start</div>
             </div>
-            <div class="arch-label">AI Providers &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Risk &amp; Compliance Team</div>
+            <div class="fade-in" style="text-align:center">
+                <div style="font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-bottom:0.75rem">Step 2</div>
+                <p style="font-size:0.9rem;color:var(--text-primary);margin-bottom:0.5rem;font-weight:600">Set one env var</p>
+                <div class="architecture-diagram" style="padding:1rem;text-align:left;font-size:0.78rem">export HTTPS_PROXY=<br>&nbsp;&nbsp;http://127.0.0.1:8080<br>&nbsp;</div>
+            </div>
+            <div class="fade-in" style="text-align:center">
+                <div style="font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-bottom:0.75rem">Step 3 (optional)</div>
+                <p style="font-size:0.9rem;color:var(--text-primary);margin-bottom:0.5rem;font-weight:600">Add routing rules</p>
+                <div class="architecture-diagram" style="padding:1rem;text-align:left;font-size:0.78rem">routing:<br>&nbsp;&nbsp;rules:<br>&nbsp;&nbsp;&nbsp;&nbsp;- match: contains_pii<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action: route_to<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destination: internal</div>
+            </div>
         </div>
     </div>
 </section>
@@ -1013,115 +1029,62 @@
 <!-- Features -->
 <section class="features" id="features">
     <div class="container">
-        <div class="section-label fade-in">// Capabilities</div>
-        <h2 class="section-title fade-in">Everything your risk function needs</h2>
-        <p class="section-subtitle fade-in">Built by people who understand model risk management, not just application security.</p>
+        <div class="section-label fade-in">// Features</div>
+        <h2 class="section-title fade-in">The 20% that covers 80% of what you need</h2>
+        <p class="section-subtitle fade-in">No bloat. Four things that actually matter for teams using AI at scale.</p>
 
         <div class="features-grid">
             <div class="feature-card-wrapper fade-in">
                 <div class="feature-card">
-                    <div class="feature-icon">📋</div>
-                    <h3>Immutable Audit Logs</h3>
-                    <p>Every prompt, response, model, latency, and cost — captured and stored with tamper-evident logging. Searchable, exportable, SIEM-ready.</p>
+                    <div class="feature-icon">⚡</div>
+                    <h3>Smart Routing</h3>
+                    <p>Route by content — PII goes to your internal model, financial data stays on Azure, simple queries downgrade to gpt-4o-mini. Rules in plain YAML.</p>
+                </div>
+            </div>
+            <div class="feature-card-wrapper fade-in">
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Cost Dashboard</h3>
+                    <p>See exactly what you're spending — by model, by day, by team. Compare what you paid vs what you would have paid without routing.</p>
                 </div>
             </div>
             <div class="feature-card-wrapper fade-in">
                 <div class="feature-card">
                     <div class="feature-icon">🔒</div>
-                    <h3>Real-Time PII Redaction</h3>
-                    <p>Detects and redacts personally identifiable information before it leaves your network — names, account numbers, health data, credentials.</p>
+                    <h3>Secrets + PII Protection</h3>
+                    <p>Detects API keys, database credentials, emails, SSNs, and credit card numbers before they leave the machine. Blocks or redacts automatically.</p>
                 </div>
             </div>
             <div class="feature-card-wrapper fade-in">
                 <div class="feature-card">
-                    <div class="feature-icon">⚙️</div>
-                    <h3>Centralized Policy Enforcement</h3>
-                    <p>Push model allowlists, data classification rules, and output controls to every developer machine from a single policy server. No manual updates.</p>
-                </div>
-            </div>
-            <div class="feature-card-wrapper fade-in">
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Risk Dashboard</h3>
-                    <p>Usage patterns, policy violations, cost by team, and model distribution — a live view for risk managers and eng leads alike.</p>
-                </div>
-            </div>
-            <div class="feature-card-wrapper fade-in">
-                <div class="feature-card">
-                    <div class="feature-icon">🔑</div>
-                    <h3>API Key Vaulting</h3>
-                    <p>Real provider keys stay server-side. Developers get gateway-issued tokens. No more API keys scattered across developer machines.</p>
-                </div>
-            </div>
-            <div class="feature-card-wrapper fade-in">
-                <div class="feature-card">
-                    <div class="feature-icon">📁</div>
-                    <h3>Compliance Evidence Export</h3>
-                    <p>Generate audit-ready evidence packages for EU AI Act, SOC 2, ISO 42001, and SR 11-7 model risk reviews — on demand, not scrambled together at audit time.</p>
+                    <div class="feature-icon">✅</div>
+                    <h3>Model Allowlist</h3>
+                    <p>Define which models your team can use. Anything outside the list is blocked at the proxy — no policy docs required.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Use Cases -->
-<section class="use-cases" id="use-cases">
+<!-- Social proof / numbers -->
+<section style="padding:5.5rem 2rem;background:var(--bg-surface)">
     <div class="container">
-        <div class="section-label fade-in">// Use Cases</div>
-        <h2 class="section-title fade-in">Built for teams with real compliance obligations</h2>
-        <p class="section-subtitle fade-in">Not a developer toy. Infrastructure for organizations where AI governance is a requirement, not a nice-to-have.</p>
-
-        <div class="use-cases-grid">
-            <div class="use-case-card fade-in">
-                <div class="use-case-industry">Fintech</div>
-                <h3>SR 11-7 model risk coverage for LLMs</h3>
-                <p>Your model risk policy covers traditional ML. Regulators are starting to ask the same questions about LLMs. AIRiskGuard bridges that gap with the logging and controls your MRM team can actually use.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;text-align:center">
+            <div class="fade-in">
+                <div style="font-size:2.5rem;font-weight:800;color:var(--cyan);margin-bottom:0.25rem">94%</div>
+                <div style="font-size:0.9rem;color:var(--text-secondary)">cost reduction routing gpt-4o → gpt-4o-mini</div>
             </div>
-            <div class="use-case-card fade-in">
-                <div class="use-case-industry">Healthtech</div>
-                <h3>HIPAA-safe AI development</h3>
-                <p>Prevent PHI from reaching external AI providers. Enforce approved model lists. Generate the documentation your privacy officer needs when developers use AI to build patient-facing features.</p>
+            <div class="fade-in">
+                <div style="font-size:2.5rem;font-weight:800;color:var(--cyan);margin-bottom:0.25rem">2 min</div>
+                <div style="font-size:0.9rem;color:var(--text-secondary)">install to first intercepted call</div>
             </div>
-            <div class="use-case-card fade-in">
-                <div class="use-case-industry">Legaltech</div>
-                <h3>Client data stays client data</h3>
-                <p>Privilege and confidentiality obligations don't pause when developers use AI. AIRiskGuard ensures client matter data isn't passed to third-party models without detection and logging.</p>
+            <div class="fade-in">
+                <div style="font-size:2.5rem;font-weight:800;color:var(--cyan);margin-bottom:0.25rem">0</div>
+                <div style="font-size:0.9rem;color:var(--text-secondary)">changes to developer workflow required</div>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- Compliance -->
-<section class="compliance" id="compliance">
-    <div class="container">
-        <div class="section-label fade-in">// Standards</div>
-        <h2 class="section-title fade-in">Maps to the frameworks your auditors use</h2>
-        <p class="section-subtitle fade-in">AIRiskGuard's controls and evidence outputs are designed around the frameworks regulators and auditors already expect.</p>
-
-        <div class="compliance-grid">
-            <div class="compliance-item fade-in">
-                <strong>EU AI Act</strong>
-                <span>Articles 9, 10, 13, 14, 15</span>
-            </div>
-            <div class="compliance-item fade-in">
-                <strong>SR 11-7</strong>
-                <span>Model Risk Management</span>
-            </div>
-            <div class="compliance-item fade-in">
-                <strong>NIST AI RMF</strong>
-                <span>Govern · Map · Measure · Manage</span>
-            </div>
-            <div class="compliance-item fade-in">
-                <strong>ISO/IEC 42001</strong>
-                <span>AI Management System</span>
-            </div>
-            <div class="compliance-item fade-in">
-                <strong>SOC 2</strong>
-                <span>Trust Service Criteria</span>
-            </div>
-            <div class="compliance-item fade-in">
-                <strong>OWASP LLM Top 10</strong>
-                <span>2025 Edition</span>
+            <div class="fade-in">
+                <div style="font-size:2.5rem;font-weight:800;color:var(--cyan);margin-bottom:0.25rem">15+</div>
+                <div style="font-size:0.9rem;color:var(--text-secondary)">AI models with built-in pricing data</div>
             </div>
         </div>
     </div>
@@ -1242,7 +1205,7 @@ async function startCheckout() {
 <footer>
     <div class="footer-links">
         <a href="https://docs.airiskguard.ai">Documentation</a>
-        <a href="https://github.com/gobeyondfj-cmd/airiskguard">GitHub</a>
+        <a href="https://github.com/gobeyondfj-cmd/airiskguard-gateway" target="_blank">GitHub</a>
         <a href="mailto:sales@airiskguard.ai">sales@airiskguard.ai</a>
     </div>
     <p>&copy; 2026 AIRiskGuard · airiskguard.ai</p>
