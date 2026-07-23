@@ -7,6 +7,10 @@
     "api/checkout.js": {
       "memory": 128,
       "maxDuration": 10
+    },
+    "api/webhook.js": {
+      "memory": 128,
+      "maxDuration": 10
     }
   }
 }
