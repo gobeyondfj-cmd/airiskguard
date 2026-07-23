@@ -1025,7 +1025,7 @@
             <div class="fade-in" style="text-align:center">
                 <div style="font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-bottom:0.75rem">Step 2</div>
                 <p style="font-size:0.9rem;color:var(--text-primary);margin-bottom:0.5rem;font-weight:600">Set one env var</p>
-                <div class="architecture-diagram" style="padding:1rem;text-align:left;font-size:0.78rem"># Claude Code<br>export ANTHROPIC_BASE_URL=<br>&nbsp;&nbsp;http://127.0.0.1:8080/anthropic<br># Codex CLI<br>export OPENAI_BASE_URL=<br>&nbsp;&nbsp;http://127.0.0.1:8080/openai</div>
+                <div class="architecture-diagram" style="padding:1rem;text-align:left;font-size:0.75rem;overflow-x:auto;white-space:nowrap"># Claude Code<br>export ANTHROPIC_BASE_URL=http://127.0.0.1:8080/anthropic<br><br># Codex CLI / OpenAI SDK<br>export OPENAI_BASE_URL=http://127.0.0.1:8080/openai</div>
             </div>
             <div class="fade-in" style="text-align:center">
                 <div style="font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-bottom:0.75rem">Step 3 (optional)</div>
@@ -1090,7 +1090,7 @@
             </div>
             <div class="fade-in">
                 <div style="font-size:2.5rem;font-weight:800;color:var(--cyan);margin-bottom:0.25rem">1</div>
-                <div style="font-size:0.9rem;color:var(--text-secondary)">env var to set — HTTPS_PROXY. That's it.</div>
+                <div style="font-size:0.9rem;color:var(--text-secondary)">env var to point Claude Code at the gateway</div>
             </div>
             <div class="fade-in">
                 <div style="font-size:2.5rem;font-weight:800;color:var(--cyan);margin-bottom:0.25rem">20+</div>
@@ -1116,7 +1116,7 @@
                 <div style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:1.75rem">MIT license · forever free</div>
                 <ul style="list-style:none;flex:1;margin-bottom:2rem">
                     <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
-                        <span style="position:absolute;left:0;color:#4ade80">✓</span> Local HTTPS proxy
+                        <span style="position:absolute;left:0;color:#4ade80">✓</span> API proxy (no CA cert needed)
                     </li>
                     <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
                         <span style="position:absolute;left:0;color:#4ade80">✓</span> Smart routing rules
@@ -1129,6 +1129,9 @@
                     </li>
                     <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
                         <span style="position:absolute;left:0;color:#4ade80">✓</span> Local audit log (JSONL)
+                    </li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
+                        <span style="position:absolute;left:0;color:#4ade80">✓</span> 10 built-in providers (Anthropic, OpenAI, DeepSeek, Moonshot, GLM…)
                     </li>
                 </ul>
                 <a href="https://github.com/gobeyondfj-cmd/airiskguard-gateway" target="_blank"
