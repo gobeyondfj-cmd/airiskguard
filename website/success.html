@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to AIRiskGuard Gateway Team</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: "Inter", system-ui, sans-serif;
+            background: #050a14;
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 4rem 1.5rem;
+            -webkit-font-smoothing: antialiased;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 3rem;
+        }
+        .logo-icon {
+            width: 28px; height: 28px;
+            background: linear-gradient(135deg, #00d4ff, #7c3aed);
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem;
+            box-shadow: 0 0 16px rgba(0,212,255,0.4);
+        }
+        .check-circle {
+            width: 72px; height: 72px;
+            background: rgba(0,212,255,0.1);
+            border: 2px solid rgba(0,212,255,0.4);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 0 32px rgba(0,212,255,0.2);
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+        .sub {
+            color: #7d8fa8;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 1rem;
+        }
+        .card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(0,212,255,0.15);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 640px;
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+        .card h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #00d4ff;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .step {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            align-items: flex-start;
+        }
+        .step:last-child { margin-bottom: 0; }
+        .step-num {
+            width: 24px; height: 24px;
+            min-width: 24px;
+            background: rgba(0,212,255,0.1);
+            border: 1px solid rgba(0,212,255,0.3);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #00d4ff;
+        }
+        .step-body { flex: 1; }
+        .step-body p {
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            margin-bottom: 0.5rem;
+        }
+        .step-body .hint {
+            font-size: 0.8rem;
+            color: #7d8fa8;
+        }
+        pre {
+            background: #020912;
+            border: 1px solid rgba(0,212,255,0.12);
+            border-radius: 8px;
+            padding: 0.875rem 1rem;
+            font-family: "SF Mono", "Fira Code", monospace;
+            font-size: 0.8rem;
+            color: #00d4ff;
+            overflow-x: auto;
+            margin-top: 0.5rem;
+            line-height: 1.6;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: #00d4ff;
+            color: #050a14;
+            box-shadow: 0 0 20px rgba(0,212,255,0.3);
+        }
+        .btn-primary:hover { box-shadow: 0 0 32px rgba(0,212,255,0.5); transform: translateY(-1px); }
+        .btn-ghost {
+            background: transparent;
+            color: #00d4ff;
+            border: 1px solid rgba(0,212,255,0.3);
+        }
+        .btn-ghost:hover { background: rgba(0,212,255,0.06); }
+        .actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .support {
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #7d8fa8;
+        }
+        .support a { color: #00d4ff; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<a href="/" class="logo">
+    <div class="logo-icon">◆</div>
+    AIRiskGuard
+</a>
+
+<div class="check-circle">✓</div>
+<h1>You're in.</h1>
+<p class="sub">Check your email for your receipt. Get the gateway running in under 5 minutes.</p>
+
+<!-- Step 1: Install -->
+<div class="card">
+    <h2>⬇ Step 1 — Install the gateway</h2>
+    <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+            <p>Install the gateway package</p>
+            <pre>pip install airiskguard-gateway</pre>
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+            <p>Generate and install the CA certificate</p>
+            <pre>airiskguard-gateway install-cert</pre>
+            <span class="hint">This lets the proxy intercept HTTPS traffic. Runs once.</span>
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+            <p>Start the gateway</p>
+            <pre>airiskguard-gateway start</pre>
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+            <p>Set these in your shell (add to ~/.zshrc or ~/.bashrc)</p>
+            <pre>export HTTPS_PROXY=http://127.0.0.1:8080
+export NODE_EXTRA_CA_CERTS=~/.config/airiskguard-gateway/mitmproxy-ca-cert.pem</pre>
+            <span class="hint">NODE_EXTRA_CA_CERTS is required for Claude Code and other Node-based AI tools.</span>
+        </div>
+    </div>
+</div>
+
+<!-- Step 2: Policy server (Team tier) -->
+<div class="card">
+    <h2>🖥 Step 2 — Start the Team policy server</h2>
+    <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+            <p>Install with server extras</p>
+            <pre>pip install "airiskguard-gateway[server]"</pre>
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+            <p>Start with Docker Compose (PostgreSQL + policy server)</p>
+            <pre>git clone https://github.com/gobeyondfj-cmd/airiskguard-gateway
+cd airiskguard-gateway
+docker compose up -d</pre>
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+            <p>Open the dashboard</p>
+            <pre>open http://localhost:8000/dashboard</pre>
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+            <p>Connect the gateway to your policy server (in config.yaml)</p>
+            <pre>policy_server:
+  url: "http://your-server:8000"
+  api_key: "your-team-api-key"</pre>
+        </div>
+    </div>
+</div>
+
+<!-- Step 3: Routing -->
+<div class="card">
+    <h2>⚡ Step 3 — Add routing rules (optional)</h2>
+    <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+            <p>Edit <code style="color:#00d4ff">~/.config/airiskguard-gateway/config.yaml</code></p>
+            <pre>routing:
+  rules:
+    # Route PII to your internal model
+    - match: contains_pii
+      action: route_to
+      destination: internal_llm
+    # Downgrade gpt-4 requests to cheaper model
+    - match: model_pattern
+      model_pattern: "gpt-4*"
+      action: route_to
+      destination: gpt_4o_mini
+  destinations:
+    internal_llm:
+      provider: ollama
+      base_url: http://localhost:11434
+      model: llama3.2
+    gpt_4o_mini:
+      provider: openai
+      model: gpt-4o-mini</pre>
+        </div>
+    </div>
+</div>
+
+<div class="actions">
+    <a href="https://github.com/gobeyondfj-cmd/airiskguard-gateway" class="btn btn-primary">View on GitHub</a>
+    <a href="mailto:sales@airiskguard.ai" class="btn btn-ghost">Email Support</a>
+</div>
+
+<p class="support">
+    Questions? Email <a href="mailto:sales@airiskguard.ai">sales@airiskguard.ai</a> — we reply within 24 hours.
+</p>
+
+</body>
+</html>

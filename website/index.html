@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIRiskGuard Gateway — AI Observability for Regulated Industries</title>
-    <meta name="description" content="Full visibility and control over every AI interaction across your engineering team. Audit logs, policy enforcement, and model risk management built for regulated industries.">
+    <title>AIRiskGuard Gateway — AI Traffic Management for Developer Teams</title>
+    <meta name="description" content="Route the right query to the right model at the right cost. Local HTTPS proxy that sits between your AI tools and AI provider APIs. Smart routing, cost savings, PII protection, model allowlist.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,6 +18,8 @@
             --cyan-glow: rgba(0,212,255,0.35);
             --purple: #7c3aed;
             --purple-dim: rgba(124,58,237,0.15);
+            --green: #22c55e;
+            --green-dim: rgba(34,197,94,0.12);
             --red: #ef4444;
             --red-dim: rgba(239,68,68,0.15);
             --text-primary: #e2e8f0;
@@ -565,6 +567,218 @@
             line-height: 1.7;
         }
 
+        /* ── How it works steps ── */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            position: relative;
+        }
+
+        .step {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 2rem;
+            position: relative;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .step:hover {
+            border-color: rgba(0,212,255,0.3);
+            box-shadow: 0 0 28px rgba(0,212,255,0.08);
+        }
+
+        .step-number {
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.78rem;
+            font-weight: 800;
+            color: var(--bg-base);
+            margin-bottom: 1rem;
+            font-family: "SF Mono", "Fira Code", monospace;
+            box-shadow: 0 0 14px rgba(0,212,255,0.4);
+        }
+
+        .step h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .step p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            line-height: 1.65;
+        }
+
+        /* ── Code block ── */
+        .code-block {
+            background: #020912;
+            border: 1px solid rgba(0,212,255,0.2);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            font-family: "SF Mono", "Fira Code", "Courier New", monospace;
+            font-size: 0.78rem;
+            line-height: 1.75;
+            color: var(--text-secondary);
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block .cm { color: #4a5568; }
+        .code-block .kw { color: var(--cyan); }
+        .code-block .st { color: #a78bfa; }
+        .code-block .nm { color: #f59e0b; }
+        .code-block .hl { color: var(--cyan); }
+        .code-block .ok { color: var(--green); }
+
+        /* ── Pricing ── */
+        .pricing { background: var(--bg-base); }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.25rem;
+            position: relative;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .pricing-card:hover {
+            border-color: rgba(0,212,255,0.3);
+            box-shadow: 0 0 32px rgba(0,212,255,0.08);
+        }
+
+        .pricing-card.featured {
+            border-color: rgba(0,212,255,0.4);
+            box-shadow: 0 0 40px rgba(0,212,255,0.1), inset 0 0 40px rgba(0,212,255,0.02);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -0.7rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, var(--cyan), var(--purple));
+            color: var(--bg-base);
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .pricing-tier {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--cyan);
+            font-family: "SF Mono", "Fira Code", monospace;
+            margin-bottom: 0.75rem;
+        }
+
+        .pricing-price {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 0.4rem;
+        }
+
+        .pricing-price sub {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            vertical-align: baseline;
+        }
+
+        .pricing-desc {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.75rem;
+            padding-bottom: 1.75rem;
+            border-bottom: 1px solid var(--border-subtle);
+            line-height: 1.65;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            padding: 0.45rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            line-height: 1.5;
+        }
+
+        .pricing-features li::before {
+            content: "✓";
+            color: var(--cyan);
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .pricing-cta {
+            display: block;
+            text-align: center;
+            padding: 0.85rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+            letter-spacing: 0.2px;
+        }
+
+        .pricing-cta-primary {
+            background: var(--cyan);
+            color: var(--bg-base);
+            box-shadow: 0 0 20px rgba(0,212,255,0.3);
+        }
+
+        .pricing-cta-primary:hover {
+            box-shadow: 0 0 32px rgba(0,212,255,0.5);
+            transform: translateY(-1px);
+        }
+
+        .pricing-cta-ghost {
+            border: 1px solid rgba(0,212,255,0.3);
+            color: var(--cyan);
+        }
+
+        .pricing-cta-ghost:hover {
+            background: rgba(0,212,255,0.07);
+            border-color: var(--cyan);
+        }
+
         /* ── Compliance ── */
         .compliance { background: var(--bg-base); }
 
@@ -686,6 +900,7 @@
             .architecture-diagram { padding: 1.5rem 1rem; }
             .arch-row { gap: 0.4rem; }
             section { padding: 4rem 1.5rem; }
+            .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
         }
     </style>
 </head>
@@ -700,7 +915,8 @@
     <ul class="nav-links">
         <li><a href="#how-it-works">How It Works</a></li>
         <li><a href="#features">Features</a></li>
-        <li><a href="#use-cases">Use Cases</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="https://github.com/gobeyondfj-cmd/airiskguard-gateway" target="_blank">GitHub</a></li>
         <li><a href="mailto:sales@airiskguard.ai" class="nav-cta">Book a Demo</a></li>
     </ul>
 </nav>
@@ -911,15 +1127,116 @@
     </div>
 </section>
 
-<!-- Final CTA -->
-<section class="final-cta">
-    <h2 class="fade-in">Get visibility before your auditor asks for it.</h2>
-    <p class="fade-in">Talk to us about what your risk and compliance team actually needs. We'll show you how Gateway fits in.</p>
-    <div class="hero-cta-group fade-in">
-        <a href="mailto:sales@airiskguard.ai?subject=Demo Request" class="hero-cta">Book a Demo</a>
-        <a href="mailto:sales@airiskguard.ai?subject=Quick Question" class="hero-cta-ghost">Send Us a Question</a>
+<!-- Pricing -->
+<section id="pricing" style="padding:5.5rem 2rem;background:var(--bg-base)">
+    <div class="container">
+        <div class="section-label fade-in">// Pricing</div>
+        <h2 class="section-title fade-in">Simple, transparent pricing</h2>
+        <p class="section-subtitle fade-in">Start free. Add the dashboard and policy server when your team is ready.</p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;max-width:780px;margin:0 auto">
+
+            <!-- Free tier -->
+            <div class="card" style="padding:2.25rem;display:flex;flex-direction:column">
+                <div style="font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-secondary);margin-bottom:0.75rem">Free — Open Source</div>
+                <div style="font-size:3rem;font-weight:800;color:var(--white);line-height:1;margin-bottom:0.25rem">$0</div>
+                <div style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:1.75rem">MIT license · forever free</div>
+                <ul style="list-style:none;flex:1;margin-bottom:2rem">
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
+                        <span style="position:absolute;left:0;color:#4ade80">✓</span> Local HTTPS proxy
+                    </li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
+                        <span style="position:absolute;left:0;color:#4ade80">✓</span> Smart routing rules
+                    </li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
+                        <span style="position:absolute;left:0;color:#4ade80">✓</span> Secrets + PII detection
+                    </li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
+                        <span style="position:absolute;left:0;color:#4ade80">✓</span> Model allowlist
+                    </li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
+                        <span style="position:absolute;left:0;color:#4ade80">✓</span> Local audit log (JSONL)
+                    </li>
+                </ul>
+                <a href="https://github.com/gobeyondfj-cmd/airiskguard-gateway" target="_blank"
+                   style="display:block;text-align:center;padding:0.75rem;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;border:1px solid rgba(0,212,255,0.3);color:var(--cyan);transition:all 0.2s"
+                   onmouseover="this.style.background='rgba(0,212,255,0.06)'"
+                   onmouseout="this.style.background='transparent'">
+                    Install Free on GitHub
+                </a>
+            </div>
+
+            <!-- Team tier -->
+            <div class="card featured-card" style="padding:2.25rem;display:flex;flex-direction:column;border-color:rgba(0,212,255,0.4);box-shadow:0 0 40px rgba(0,212,255,0.08);position:relative">
+                <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--cyan);color:#050a14;padding:0.2rem 1rem;border-radius:12px;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap">Most Popular</div>
+                <div style="font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-bottom:0.75rem">Team</div>
+                <div style="font-size:3rem;font-weight:800;color:var(--white);line-height:1;margin-bottom:0.25rem">$299</div>
+                <div style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:1.75rem">per month · cancel anytime</div>
+                <ul style="list-style:none;flex:1;margin-bottom:2rem">
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
+                        <span style="position:absolute;left:0;color:#4ade80">✓</span> Everything in Free
+                    </li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
+                        <span style="position:absolute;left:0;color:#4ade80">✓</span> Cost dashboard (spend by model)
+                    </li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
+                        <span style="position:absolute;left:0;color:#4ade80">✓</span> Centralized policy server
+                    </li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
+                        <span style="position:absolute;left:0;color:#4ade80">✓</span> Slack alerts on violations
+                    </li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
+                        <span style="position:absolute;left:0;color:#4ade80">✓</span> Per-team policies
+                    </li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
+                        <span style="position:absolute;left:0;color:#4ade80">✓</span> 30-day audit log retention
+                    </li>
+                </ul>
+                <button id="checkout-btn"
+                    onclick="startCheckout()"
+                    style="display:block;width:100%;text-align:center;padding:0.875rem;border-radius:8px;font-weight:700;font-size:0.95rem;border:none;background:var(--cyan);color:#050a14;cursor:pointer;box-shadow:0 0 24px rgba(0,212,255,0.35);transition:all 0.2s"
+                    onmouseover="this.style.boxShadow='0 0 40px rgba(0,212,255,0.55)'"
+                    onmouseout="this.style.boxShadow='0 0 24px rgba(0,212,255,0.35)'">
+                    Start Team — $299/mo
+                </button>
+                <p style="text-align:center;margin-top:0.75rem;font-size:0.78rem;color:var(--text-secondary)">No setup fee · Cancel anytime</p>
+            </div>
+        </div>
     </div>
 </section>
+
+<!-- Final CTA -->
+<section class="final-cta">
+    <h2 class="fade-in">Stop flying blind on AI costs.</h2>
+    <p class="fade-in">Install the free proxy today. Add the dashboard when you're ready to see where the money goes.</p>
+    <div class="hero-cta-group fade-in">
+        <a href="https://github.com/gobeyondfj-cmd/airiskguard-gateway" target="_blank" class="hero-cta">Install Free</a>
+        <a href="mailto:sales@airiskguard.ai?subject=Demo Request" class="hero-cta-ghost">Book a Demo</a>
+    </div>
+</section>
+
+<script>
+async function startCheckout() {
+    const btn = document.getElementById('checkout-btn');
+    btn.textContent = 'Redirecting...';
+    btn.disabled = true;
+    try {
+        const res = await fetch('/api/checkout', { method: 'POST' });
+        const data = await res.json();
+        if (data.url) {
+            window.location.href = data.url;
+        } else {
+            btn.textContent = 'Start Team — $299/mo';
+            btn.disabled = false;
+            alert('Something went wrong. Email sales@airiskguard.ai to subscribe.');
+        }
+    } catch (e) {
+        btn.textContent = 'Start Team — $299/mo';
+        btn.disabled = false;
+        alert('Something went wrong. Email sales@airiskguard.ai to subscribe.');
+    }
+}
+</script>
 
 <!-- Footer -->
 <footer>

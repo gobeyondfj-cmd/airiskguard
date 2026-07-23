@@ -1,0 +1,12 @@
+{
+  "outputDirectory": "website",
+  "framework": null,
+  "installCommand": "npm install",
+  "buildCommand": "",
+  "functions": {
+    "api/checkout.js": {
+      "memory": 128,
+      "maxDuration": 10
+    }
+  }
+}
