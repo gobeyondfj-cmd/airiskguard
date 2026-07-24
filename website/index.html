@@ -908,13 +908,14 @@
 
 <!-- Navigation -->
 <nav>
-    <a href="/" class="nav-logo">
+    <a href="https://github.com/gobeyondfj-cmd/airiskguard-gateway" class="nav-logo" target="_blank">
         <div class="nav-logo-icon">◆</div>
         <span>AI</span>RiskGuard
     </a>
     <ul class="nav-links">
         <li><a href="#how-it-works">How It Works</a></li>
         <li><a href="#features">Features</a></li>
+        <li><a href="#providers">Providers</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="https://github.com/gobeyondfj-cmd/airiskguard-gateway" target="_blank">GitHub</a></li>
         <li><a href="mailto:sales@airiskguard.ai" class="nav-cta">Book a Demo</a></li>
@@ -925,40 +926,132 @@
 <section class="hero">
     <div class="hero-badge">
         <div class="hero-badge-dot"></div>
-        Open-source AI gateway · MIT license
+        v0.8.0 · MIT · pip install airiskguard
     </div>
-    <h1>Cut your AI bill.<br><em>Route smarter. Ship faster.</em></h1>
-    <p>A local proxy that sits between your developers and AI providers. Route expensive queries to cheaper models automatically. Block secrets before they leave the machine.</p>
+    <h1>Every AI call.<br><em>Controlled. Cheaper.</em></h1>
+    <p>AIRiskGuard Gateway sits between your developers and AI providers. Route by content, enforce budgets, block secrets — without changing a single line of code.</p>
     <div class="hero-cta-group">
         <a href="https://github.com/gobeyondfj-cmd/airiskguard-gateway" target="_blank" class="hero-cta">Install Free</a>
-        <a href="#how-it-works" class="hero-cta-ghost">See How It Works</a>
+        <a href="#dashboard" class="hero-cta-ghost">See the Dashboard</a>
     </div>
 </section>
 
 <!-- Trust bar -->
 <div class="trust-bar">
-    <p>
-        Works with <strong>Claude Code</strong> <span class="trust-sep"></span>
+    <p style="margin-bottom:0.5rem">
+        <strong style="color:var(--text-secondary);font-weight:600">Works with</strong>&nbsp;
+        <strong>Claude Code</strong> <span class="trust-sep"></span>
         <strong>Cursor</strong> <span class="trust-sep"></span>
         <strong>GitHub Copilot</strong> <span class="trust-sep"></span>
+        <strong>Windsurf</strong> <span class="trust-sep"></span>
         <strong>any AI tool</strong>
-        &nbsp;&nbsp;·&nbsp;&nbsp;
-        Routes to <strong>Claude</strong> <span class="trust-sep"></span>
-        <strong>GPT-4o</strong> <span class="trust-sep"></span>
+    </p>
+    <p>
+        <strong style="color:var(--text-secondary);font-weight:600">Routes to</strong>&nbsp;
+        <strong>Claude</strong> <span class="trust-sep"></span>
+        <strong>GPT-5.6</strong> <span class="trust-sep"></span>
         <strong>Gemini</strong> <span class="trust-sep"></span>
         <strong>DeepSeek</strong> <span class="trust-sep"></span>
-        <strong>Moonshot</strong> <span class="trust-sep"></span>
+        <strong>Kimi K3</strong> <span class="trust-sep"></span>
         <strong>GLM</strong> <span class="trust-sep"></span>
         <strong>MiniMax</strong> <span class="trust-sep"></span>
-        <strong>Llama</strong> <span class="trust-sep"></span>
         <strong>Mistral</strong> <span class="trust-sep"></span>
         <strong>Ollama</strong> <span class="trust-sep"></span>
         <strong>vLLM</strong> <span class="trust-sep"></span>
-        <strong>LiteLLM</strong> <span class="trust-sep"></span>
-        <strong>Azure OpenAI</strong> <span class="trust-sep"></span>
-        <strong>any OpenAI-compatible endpoint</strong>
+        <strong>Azure OpenAI</strong>
     </p>
 </div>
+
+<!-- Request Flow Diagram -->
+<section class="how-it-works" id="how-it-works">
+    <div class="container">
+        <div class="section-label fade-in">// Request Flow</div>
+        <h2 class="section-title fade-in">Every request, every step, under your control.</h2>
+        <p class="section-subtitle fade-in">The gateway intercepts AI calls before they reach any provider — scanning, routing, logging, and forwarding in milliseconds.</p>
+
+        <div class="architecture-diagram fade-in" style="max-width:860px;line-height:1.85">
+            <div style="color:#4a5568;margin-bottom:0.5rem;font-size:0.72rem;letter-spacing:1px">// OUTBOUND REQUEST</div>
+
+            <div style="color:var(--text-secondary)">Developer types prompt in <span style="color:var(--cyan)">Claude Code</span></div>
+            <div style="color:rgba(0,212,255,0.35);text-align:center;font-size:1.1rem;line-height:1.4">↓</div>
+            <div style="color:#a78bfa;font-size:0.78rem;margin-bottom:0.25rem">ANTHROPIC_BASE_URL=http://127.0.0.1:8080/anthropic</div>
+            <div style="color:rgba(0,212,255,0.35);text-align:center;font-size:1.1rem;line-height:1.4">↓</div>
+
+            <div style="border:1px solid rgba(0,212,255,0.25);border-radius:8px;padding:1.1rem 1.5rem;margin:0.5rem 0;background:rgba(0,212,255,0.03)">
+                <div style="color:var(--cyan);font-weight:700;margin-bottom:0.65rem;letter-spacing:0.5px">┌─── AIRiskGuard Gateway ───────────────────────────────────┐</div>
+                <div style="padding-left:1rem;color:var(--text-secondary)">
+                    <div style="margin:0.2rem 0">
+                        <span style="color:var(--text-muted)">①</span>
+                        <span style="color:var(--text-secondary)"> Auth&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gw-abc123 valid →</span>
+                        <span style="color:#4ade80"> john@company.com</span>
+                    </div>
+                    <div style="margin:0.2rem 0">
+                        <span style="color:var(--text-muted)">②</span>
+                        <span style="color:var(--text-secondary)"> Cost&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $23.40 / $50 limit →</span>
+                        <span style="background:rgba(34,197,94,0.15);color:#4ade80;padding:0.05rem 0.5rem;border-radius:4px;font-size:0.75rem;font-weight:700"> OK </span>
+                    </div>
+                    <div style="margin:0.2rem 0">
+                        <span style="color:var(--text-muted)">③</span>
+                        <span style="color:var(--text-secondary)"> Scan&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; API key detected →</span>
+                        <span style="background:rgba(239,68,68,0.18);color:#f87171;padding:0.05rem 0.5rem;border-radius:4px;font-size:0.75rem;font-weight:700"> BLOCK </span>
+                        <span style="color:var(--text-secondary)"> &nbsp;/&nbsp; SSN →</span>
+                        <span style="background:rgba(251,146,60,0.18);color:#fb923c;padding:0.05rem 0.5rem;border-radius:4px;font-size:0.75rem;font-weight:700"> REDACT </span>
+                    </div>
+                    <div style="margin:0.2rem 0">
+                        <span style="color:var(--text-muted)">④</span>
+                        <span style="color:var(--text-secondary)"> Allowlist  claude-sonnet-5</span>
+                        <span style="color:#4ade80"> ✓</span>
+                    </div>
+                    <div style="margin:0.2rem 0">
+                        <span style="color:var(--text-muted)">⑤</span>
+                        <span style="color:var(--text-secondary)"> Route&nbsp;&nbsp;&nbsp;&nbsp; simple Q&amp;A → <span style="color:#a78bfa">DeepSeek Flash</span></span>
+                        <span style="color:#4a5568"> ($0.30/M)</span>
+                    </div>
+                    <div style="margin:0.2rem 0">
+                        <span style="color:var(--text-muted)">⑥</span>
+                        <span style="color:var(--text-secondary)"> Rewrite&nbsp;&nbsp; swap gw-key → real <span style="color:#fb923c">sk-ant-...</span></span>
+                    </div>
+                </div>
+                <div style="color:var(--cyan);font-weight:700;margin-top:0.65rem;letter-spacing:0.5px">└───────────────────────────────────────────────────────────┘</div>
+            </div>
+
+            <div style="color:rgba(0,212,255,0.35);text-align:center;font-size:1.1rem;line-height:1.4">↓</div>
+            <div style="color:var(--text-secondary);margin:0.25rem 0">
+                <span style="color:#a78bfa">api.anthropic.com</span>
+                <span style="color:var(--text-muted)"> / </span>
+                <span style="color:#a78bfa">api.deepseek.com</span>
+                <span style="color:var(--text-muted)"> / </span>
+                <span style="color:#a78bfa">localhost:11434</span>
+            </div>
+            <div style="color:rgba(0,212,255,0.35);text-align:center;font-size:1.1rem;line-height:1.4">↓</div>
+
+            <div style="color:#4a5568;margin:0.5rem 0 0.25rem;font-size:0.72rem;letter-spacing:1px">// INBOUND RESPONSE</div>
+            <div style="border:1px solid rgba(124,58,237,0.3);border-radius:8px;padding:1.1rem 1.5rem;margin:0.25rem 0;background:rgba(124,58,237,0.03)">
+                <div style="color:#a78bfa;font-weight:700;margin-bottom:0.65rem;letter-spacing:0.5px">┌─── Inbound scan ──────────────────────────────────────────┐</div>
+                <div style="padding-left:1rem;color:var(--text-secondary)">
+                    <div style="margin:0.2rem 0">
+                        <span style="color:var(--text-muted)">⑦</span>
+                        <span style="color:var(--text-secondary)"> Scan response&nbsp;&nbsp; SQL injection in code block? →</span>
+                        <span style="background:rgba(251,191,36,0.15);color:#fbbf24;padding:0.05rem 0.5rem;border-radius:4px;font-size:0.75rem;font-weight:700"> LOG </span>
+                    </div>
+                    <div style="margin:0.2rem 0">
+                        <span style="color:var(--text-muted)">⑧</span>
+                        <span style="color:var(--text-secondary)"> Stream to Claude Code</span>
+                    </div>
+                    <div style="margin:0.2rem 0">
+                        <span style="color:var(--text-muted)">⑨</span>
+                        <span style="color:var(--text-secondary)"> Log: <span style="color:#4ade80">tokens=1240</span>, <span style="color:#4ade80">cost=$0.0004</span>, <span style="color:#4ade80">latency=890ms</span></span>
+                    </div>
+                    <div style="margin:0.2rem 0">
+                        <span style="color:var(--text-muted)">⑩</span>
+                        <span style="color:var(--text-secondary)"> Ship to policy server</span>
+                    </div>
+                </div>
+                <div style="color:#a78bfa;font-weight:700;margin-top:0.65rem;letter-spacing:0.5px">└───────────────────────────────────────────────────────────┘</div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Problem -->
 <section class="problem" id="problem">
@@ -969,69 +1062,197 @@
 
         <div class="problem-grid">
             <div class="problem-card fade-in">
-                <h3>GPT-4o for everything</h3>
-                <p>60% of your team's queries are simple — autocomplete, code explanation, quick lookups. You're paying $10/M tokens when $0.15/M would do the same job.</p>
+                <h3>Claude Sonnet-5 for everything</h3>
+                <p>60% of your team's queries are simple Q&amp;A, autocomplete, or quick lookups. You're paying $3/M tokens when $0.30/M on DeepSeek Flash does the same job.</p>
             </div>
             <div class="problem-card fade-in">
                 <h3>PII and secrets in prompts</h3>
-                <p>Developers paste customer data, API keys, and internal documents into AI tools daily. None of it is caught before it reaches an external API.</p>
+                <p>Developers paste customer SSNs, API keys, and credit card data into AI tools daily. None of it is caught before it reaches an external API.</p>
             </div>
             <div class="problem-card fade-in">
                 <h3>Zero cost visibility</h3>
-                <p>You get one monthly invoice from Anthropic or OpenAI. You have no idea which team, which tool, or which model is responsible for the bill.</p>
+                <p>You get one monthly invoice from Anthropic or OpenAI. You have no idea which developer, which tool, or which model is responsible for the bill.</p>
             </div>
             <div class="problem-card fade-in">
                 <h3>No routing control</h3>
-                <p>Sensitive data — financial records, health data, client files — should never reach an external model. Right now it does, and nobody knows.</p>
+                <p>Financial records, health data, client files — they should never leave the machine. Right now they do. No one knows, and there's no audit trail.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- How It Works -->
-<section class="how-it-works" id="how-it-works">
+<!-- Dashboard Mockup -->
+<section id="dashboard" style="padding:5.5rem 2rem;background:var(--bg-surface)">
     <div class="container">
-        <div class="section-label fade-in">// How It Works</div>
-        <h2 class="section-title fade-in">One proxy. Full control.</h2>
-        <p class="section-subtitle fade-in">Install in two minutes. Set one environment variable. Every AI call is now visible, routable, and logged.</p>
+        <div class="section-label fade-in">// Dashboard</div>
+        <h2 class="section-title fade-in">Real-time visibility into every AI call across your team.</h2>
+        <p class="section-subtitle fade-in">The web dashboard ships with the Team plan. Built on the same audit log the CLI writes locally.</p>
 
-        <div class="architecture-diagram fade-in">
-            <div class="arch-row">
-                <div class="arch-box">Claude Code</div>
-                <div class="arch-box">Cursor</div>
-                <div class="arch-box">Copilot</div>
-                <div class="arch-box">Your App</div>
+        <!-- Dashboard chrome -->
+        <div class="fade-in" style="background:#020912;border:1px solid rgba(0,212,255,0.2);border-radius:16px;overflow:hidden;box-shadow:0 0 60px rgba(0,212,255,0.07)">
+            <!-- Title bar -->
+            <div style="background:rgba(10,22,40,0.9);border-bottom:1px solid rgba(0,212,255,0.1);padding:0.75rem 1.5rem;display:flex;align-items:center;gap:0.5rem">
+                <div style="width:12px;height:12px;border-radius:50%;background:#ef4444;opacity:0.7"></div>
+                <div style="width:12px;height:12px;border-radius:50%;background:#f59e0b;opacity:0.7"></div>
+                <div style="width:12px;height:12px;border-radius:50%;background:#22c55e;opacity:0.7"></div>
+                <div style="margin-left:1rem;font-family:'SF Mono','Fira Code',monospace;font-size:0.75rem;color:var(--text-muted)">AIRiskGuard Dashboard — Overview</div>
+                <div style="margin-left:auto;display:flex;gap:1.5rem;font-size:0.75rem;font-family:'SF Mono','Fira Code',monospace">
+                    <span style="color:var(--cyan);border-bottom:1px solid var(--cyan);padding-bottom:0.1rem">Overview</span>
+                    <span style="color:var(--text-muted)">Analytics</span>
+                    <span style="color:var(--text-muted)">Users</span>
+                    <span style="color:var(--text-muted)">Providers</span>
+                </div>
             </div>
-            <div class="arch-row"><div class="arch-arrow">↓</div></div>
-            <div class="arch-row">
-                <div class="arch-box highlight">◆ AIRiskGuard Gateway</div>
+
+            <!-- Three-panel layout -->
+            <div style="display:grid;grid-template-columns:1fr 1fr 1.6fr;gap:0;min-height:340px">
+
+                <!-- Panel A: Overview stats -->
+                <div style="border-right:1px solid rgba(255,255,255,0.05);padding:1.75rem">
+                    <div style="font-size:0.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);font-family:'SF Mono','Fira Code',monospace;margin-bottom:1.25rem">OVERVIEW · last 24h</div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem">
+                        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:1rem">
+                            <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:0.3rem">Total Requests</div>
+                            <div style="font-size:1.6rem;font-weight:800;color:var(--white);line-height:1">1,247</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:1rem">
+                            <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:0.3rem">Total Cost</div>
+                            <div style="font-size:1.6rem;font-weight:800;color:var(--cyan);line-height:1">$4.82</div>
+                        </div>
+                        <div style="background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:1rem">
+                            <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:0.3rem">Blocked</div>
+                            <div style="font-size:1.6rem;font-weight:800;color:#f87171;line-height:1">23</div>
+                        </div>
+                        <div style="background:rgba(124,58,237,0.07);border:1px solid rgba(124,58,237,0.2);border-radius:8px;padding:1rem">
+                            <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:0.3rem">Routed</div>
+                            <div style="font-size:1.6rem;font-weight:800;color:#a78bfa;line-height:1">891</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel B: Spend by model (bar chart) -->
+                <div style="border-right:1px solid rgba(255,255,255,0.05);padding:1.75rem">
+                    <div style="font-size:0.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);font-family:'SF Mono','Fira Code',monospace;margin-bottom:1.25rem">SPEND BY MODEL</div>
+
+                    <div style="margin-bottom:1rem">
+                        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.3rem">
+                            <span style="font-size:0.72rem;color:var(--text-secondary);font-family:'SF Mono','Fira Code',monospace">deepseek-v4-flash</span>
+                            <span style="font-size:0.72rem;color:var(--cyan);font-family:'SF Mono','Fira Code',monospace">$1.24</span>
+                        </div>
+                        <div style="height:8px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden">
+                            <div style="height:100%;width:51%;background:linear-gradient(90deg,var(--cyan),rgba(0,212,255,0.6));border-radius:4px"></div>
+                        </div>
+                        <div style="font-size:0.65rem;color:var(--text-muted);margin-top:0.2rem">891 req</div>
+                    </div>
+
+                    <div style="margin-bottom:1rem">
+                        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.3rem">
+                            <span style="font-size:0.72rem;color:var(--text-secondary);font-family:'SF Mono','Fira Code',monospace">claude-sonnet-5</span>
+                            <span style="font-size:0.72rem;color:var(--cyan);font-family:'SF Mono','Fira Code',monospace">$2.41</span>
+                        </div>
+                        <div style="height:8px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden">
+                            <div style="height:100%;width:75%;background:linear-gradient(90deg,var(--purple),rgba(124,58,237,0.6));border-radius:4px"></div>
+                        </div>
+                        <div style="font-size:0.65rem;color:var(--text-muted);margin-top:0.2rem">287 req</div>
+                    </div>
+
+                    <div>
+                        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.3rem">
+                            <span style="font-size:0.72rem;color:var(--text-secondary);font-family:'SF Mono','Fira Code',monospace">gpt-5.6-luna</span>
+                            <span style="font-size:0.72rem;color:var(--cyan);font-family:'SF Mono','Fira Code',monospace">$0.87</span>
+                        </div>
+                        <div style="height:8px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden">
+                            <div style="height:100%;width:28%;background:linear-gradient(90deg,#f59e0b,rgba(245,158,11,0.6));border-radius:4px"></div>
+                        </div>
+                        <div style="font-size:0.65rem;color:var(--text-muted);margin-top:0.2rem">69 req</div>
+                    </div>
+                </div>
+
+                <!-- Panel C: Recent Events -->
+                <div style="padding:1.75rem;overflow-x:auto">
+                    <div style="font-size:0.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);font-family:'SF Mono','Fira Code',monospace;margin-bottom:1.25rem">RECENT EVENTS</div>
+                    <table style="width:100%;border-collapse:collapse;font-size:0.72rem;font-family:'SF Mono','Fira Code',monospace">
+                        <thead>
+                            <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+                                <th style="text-align:left;padding:0.3rem 0.5rem 0.5rem 0;color:var(--text-muted);font-weight:600">Time</th>
+                                <th style="text-align:left;padding:0.3rem 0.5rem;color:var(--text-muted);font-weight:600">User</th>
+                                <th style="text-align:left;padding:0.3rem 0.5rem;color:var(--text-muted);font-weight:600">Model</th>
+                                <th style="text-align:left;padding:0.3rem 0.5rem;color:var(--text-muted);font-weight:600">Action</th>
+                                <th style="text-align:right;padding:0.3rem 0 0.5rem 0.5rem;color:var(--text-muted);font-weight:600">Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom:1px solid rgba(255,255,255,0.03)">
+                                <td style="padding:0.45rem 0.5rem 0.45rem 0;color:var(--text-muted)">10:42</td>
+                                <td style="padding:0.45rem 0.5rem;color:var(--text-secondary)">john@company.com</td>
+                                <td style="padding:0.45rem 0.5rem;color:var(--text-secondary)">deepseek-v4-flash</td>
+                                <td style="padding:0.45rem 0.5rem"><span style="background:rgba(124,58,237,0.2);color:#a78bfa;padding:0.1rem 0.5rem;border-radius:4px;font-size:0.68rem;font-weight:700">routed</span></td>
+                                <td style="padding:0.45rem 0 0.45rem 0.5rem;text-align:right;color:var(--text-secondary)">$0.0001</td>
+                            </tr>
+                            <tr style="border-bottom:1px solid rgba(255,255,255,0.03)">
+                                <td style="padding:0.45rem 0.5rem 0.45rem 0;color:var(--text-muted)">10:41</td>
+                                <td style="padding:0.45rem 0.5rem;color:var(--text-secondary)">jane@company.com</td>
+                                <td style="padding:0.45rem 0.5rem;color:var(--text-secondary)">claude-sonnet-5</td>
+                                <td style="padding:0.45rem 0.5rem"><span style="background:rgba(34,197,94,0.15);color:#4ade80;padding:0.1rem 0.5rem;border-radius:4px;font-size:0.68rem;font-weight:700">allowed</span></td>
+                                <td style="padding:0.45rem 0 0.45rem 0.5rem;text-align:right;color:var(--text-secondary)">$0.0043</td>
+                            </tr>
+                            <tr style="border-bottom:1px solid rgba(255,255,255,0.03)">
+                                <td style="padding:0.45rem 0.5rem 0.45rem 0;color:var(--text-muted)">10:39</td>
+                                <td style="padding:0.45rem 0.5rem;color:var(--text-secondary)">john@company.com</td>
+                                <td style="padding:0.45rem 0.5rem;color:var(--text-secondary)">gpt-5.6-sol</td>
+                                <td style="padding:0.45rem 0.5rem"><span style="background:rgba(239,68,68,0.18);color:#f87171;padding:0.1rem 0.5rem;border-radius:4px;font-size:0.68rem;font-weight:700">blocked</span></td>
+                                <td style="padding:0.45rem 0 0.45rem 0.5rem;text-align:right;color:var(--text-muted)">—</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.45rem 0.5rem 0.45rem 0;color:var(--text-muted)">10:38</td>
+                                <td style="padding:0.45rem 0.5rem;color:var(--text-secondary)">bob@company.com</td>
+                                <td style="padding:0.45rem 0.5rem;color:var(--text-secondary)">claude-sonnet-5</td>
+                                <td style="padding:0.45rem 0.5rem"><span style="background:rgba(251,146,60,0.18);color:#fb923c;padding:0.1rem 0.5rem;border-radius:4px;font-size:0.68rem;font-weight:700">redacted</span></td>
+                                <td style="padding:0.45rem 0 0.45rem 0.5rem;text-align:right;color:var(--text-secondary)">$0.0021</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="arch-label">Scan · Route · Log · Block</div>
-            <div class="arch-row"><div class="arch-arrow">↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓</div></div>
-            <div class="arch-row">
-                <div class="arch-box">Anthropic · OpenAI</div>
-                <div class="arch-box">Azure · Private</div>
-                <div class="arch-box highlight">Cost Dashboard</div>
-            </div>
-            <div class="arch-label">Expensive model &nbsp;&nbsp;&nbsp; Sensitive data &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Team tier</div>
         </div>
+    </div>
+</section>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:3rem">
-            <div class="fade-in" style="text-align:center">
-                <div style="font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-bottom:0.75rem">Step 1</div>
-                <p style="font-size:0.9rem;color:var(--text-primary);margin-bottom:0.5rem;font-weight:600">Install and start</p>
-                <div class="architecture-diagram" style="padding:1rem;text-align:left;font-size:0.78rem">pip install airiskguard<br>airiskguard-gateway start</div>
-            </div>
-            <div class="fade-in" style="text-align:center">
-                <div style="font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-bottom:0.75rem">Step 2</div>
-                <p style="font-size:0.9rem;color:var(--text-primary);margin-bottom:0.5rem;font-weight:600">Set one env var</p>
-                <div class="architecture-diagram" style="padding:1rem;text-align:left;font-size:0.75rem;overflow-x:auto;white-space:nowrap"># Claude Code<br>export ANTHROPIC_BASE_URL=http://127.0.0.1:8080/anthropic<br>export ANTHROPIC_API_KEY=gateway-managed<br><br># Codex CLI / OpenAI SDK<br>export OPENAI_BASE_URL=http://127.0.0.1:8080/openai<br>export OPENAI_API_KEY=gateway-managed</div>
-            </div>
-            <div class="fade-in" style="text-align:center">
-                <div style="font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-bottom:0.75rem">Step 3 (optional)</div>
-                <p style="font-size:0.9rem;color:var(--text-primary);margin-bottom:0.5rem;font-weight:600">Add routing rules</p>
-                <div class="architecture-diagram" style="padding:1rem;text-align:left;font-size:0.78rem">routing:<br>&nbsp;&nbsp;rules:<br>&nbsp;&nbsp;&nbsp;&nbsp;- match: contains_pii<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action: route_to<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destination: internal</div>
-            </div>
+<!-- Routing Config (YAML) -->
+<section style="padding:5.5rem 2rem;background:var(--bg-base)" id="routing">
+    <div class="container">
+        <div class="section-label fade-in">// Configuration</div>
+        <h2 class="section-title fade-in">Smart routing in plain YAML</h2>
+        <p class="section-subtitle fade-in">Define rules in config.yaml. Restart the gateway. Done. No code changes needed on any client.</p>
+
+        <div class="architecture-diagram fade-in" style="max-width:760px;margin:0 auto;line-height:1.9;font-size:0.8rem">
+            <div style="color:#4a5568;margin-bottom:0.75rem;font-size:0.7rem;letter-spacing:1px">config.yaml</div>
+
+<span style="color:var(--cyan)">routing</span><span style="color:var(--text-secondary)">:</span>
+  <span style="color:var(--cyan)">sticky_sessions</span><span style="color:var(--text-secondary)">: </span><span style="color:#fb923c">true</span><span style="color:#4a5568">   # same conversation → same model</span>
+
+  <span style="color:var(--cyan)">rules</span><span style="color:var(--text-secondary)">:</span>
+    <span style="color:var(--text-secondary)">- </span><span style="color:var(--cyan)">match</span><span style="color:var(--text-secondary)">: </span><span style="color:#a78bfa">contains_pii</span><span style="color:#4a5568">         # SSN, email, credit card</span>
+      <span style="color:var(--cyan)">action</span><span style="color:var(--text-secondary)">: </span><span style="color:#4ade80">route_to</span>
+      <span style="color:var(--cyan)">destination</span><span style="color:var(--text-secondary)">: </span><span style="color:#f59e0b">local_ollama</span><span style="color:#4a5568">   # never leaves the machine</span>
+
+    <span style="color:var(--text-secondary)">- </span><span style="color:var(--cyan)">match</span><span style="color:var(--text-secondary)">: </span><span style="color:#a78bfa">task_type</span>
+      <span style="color:var(--cyan)">task_type</span><span style="color:var(--text-secondary)">: </span><span style="color:#a78bfa">simple_qa</span><span style="color:#4a5568">        # "what is", "define", etc.</span>
+      <span style="color:var(--cyan)">action</span><span style="color:var(--text-secondary)">: </span><span style="color:#4ade80">route_to</span>
+      <span style="color:var(--cyan)">destination</span><span style="color:var(--text-secondary)">: </span><span style="color:#f59e0b">deepseek_flash</span><span style="color:#4a5568"> # $0.30/M vs $3.00/M</span>
+
+    <span style="color:var(--text-secondary)">- </span><span style="color:var(--cyan)">match</span><span style="color:var(--text-secondary)">: </span><span style="color:#a78bfa">contains_financial_data</span>
+      <span style="color:var(--cyan)">action</span><span style="color:var(--text-secondary)">: </span><span style="color:#f87171">block</span><span style="color:#4a5568">               # hard block</span>
+
+    <span style="color:var(--text-secondary)">- </span><span style="color:var(--cyan)">match</span><span style="color:var(--text-secondary)">: </span><span style="color:#a78bfa">model_pattern</span>
+      <span style="color:var(--cyan)">model_pattern</span><span style="color:var(--text-secondary)">: </span><span style="color:#a78bfa">"gpt-5.6-sol"</span>
+      <span style="color:var(--cyan)">action</span><span style="color:var(--text-secondary)">: </span><span style="color:#4ade80">route_to</span>
+      <span style="color:var(--cyan)">destination</span><span style="color:var(--text-secondary)">: </span><span style="color:#f59e0b">gpt_luna</span><span style="color:#4a5568">       # $1/M instead of $5/M</span>
+
+  <span style="color:var(--cyan)">destinations</span><span style="color:var(--text-secondary)">:</span>
+    <span style="color:var(--cyan)">local_ollama</span><span style="color:var(--text-secondary)">:   { </span><span style="color:var(--cyan)">provider</span><span style="color:var(--text-secondary)">: </span><span style="color:#a78bfa">ollama</span><span style="color:var(--text-secondary)">,    </span><span style="color:var(--cyan)">model</span><span style="color:var(--text-secondary)">: </span><span style="color:#a78bfa">llama3.3:70b</span><span style="color:var(--text-secondary)"> }</span>
+    <span style="color:var(--cyan)">deepseek_flash</span><span style="color:var(--text-secondary)">: { </span><span style="color:var(--cyan)">provider</span><span style="color:var(--text-secondary)">: </span><span style="color:#a78bfa">deepseek</span><span style="color:var(--text-secondary)">,  </span><span style="color:var(--cyan)">model</span><span style="color:var(--text-secondary)">: </span><span style="color:#a78bfa">deepseek-v4-flash</span><span style="color:var(--text-secondary)"> }</span>
+    <span style="color:var(--cyan)">gpt_luna</span><span style="color:var(--text-secondary)">:       { </span><span style="color:var(--cyan)">provider</span><span style="color:var(--text-secondary)">: </span><span style="color:#a78bfa">openai</span><span style="color:var(--text-secondary)">,    </span><span style="color:var(--cyan)">model</span><span style="color:var(--text-secondary)">: </span><span style="color:#a78bfa">gpt-5.6-luna</span><span style="color:var(--text-secondary)"> }</span>
         </div>
     </div>
 </section>
@@ -1040,62 +1261,96 @@
 <section class="features" id="features">
     <div class="container">
         <div class="section-label fade-in">// Features</div>
-        <h2 class="section-title fade-in">The 20% that covers 80% of what you need</h2>
-        <p class="section-subtitle fade-in">No bloat. Four things that actually matter for teams using AI at scale.</p>
+        <h2 class="section-title fade-in">Four things that actually matter</h2>
+        <p class="section-subtitle fade-in">No bloat. The 20% that covers 80% of what teams using AI at scale need.</p>
 
         <div class="features-grid">
             <div class="feature-card-wrapper fade-in">
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
                     <h3>Smart Routing</h3>
-                    <p>Route by content — PII goes to your internal model, financial data stays on Azure, simple queries downgrade to gpt-4o-mini. Rules in plain YAML.</p>
+                    <p>Route by PII, task type, language, or model pattern. Simple Q&amp;A goes to DeepSeek Flash ($0.30/M). Sensitive content stays on local Ollama. Session stickiness keeps conversations on the same model throughout.</p>
                 </div>
             </div>
             <div class="feature-card-wrapper fade-in">
                 <div class="feature-card">
                     <div class="feature-icon">💰</div>
                     <h3>Cost Dashboard</h3>
-                    <p>See exactly what you're spending — by model, by day, by team. Compare what you paid vs what you would have paid without routing.</p>
+                    <p>Spend by model, by developer, by day. Set per-provider budget limits. Get Slack alerts before you hit the ceiling. See what routing actually saved you versus sending everything to Claude Sonnet-5.</p>
                 </div>
             </div>
             <div class="feature-card-wrapper fade-in">
                 <div class="feature-card">
                     <div class="feature-icon">🔒</div>
-                    <h3>Sensitive Data Detection</h3>
-                    <p>Detects and blocks PII (emails, SSNs, credit cards), secrets (API keys, credentials), financial data (account numbers, revenue figures, trade data), and compliance-sensitive content — before it reaches any external model.</p>
+                    <h3>Secrets + PII Detection</h3>
+                    <p>API keys, SSNs, credit cards, bank account numbers, and financial data are blocked or redacted before leaving the machine. Outbound and inbound scan — catches injected content in responses too.</p>
                 </div>
             </div>
             <div class="feature-card-wrapper fade-in">
                 <div class="feature-card">
                     <div class="feature-icon">✅</div>
                     <h3>Model Allowlist</h3>
-                    <p>Define which models your team can use. Anything outside the list is blocked at the proxy — no policy docs required.</p>
+                    <p>10 built-in providers, 50+ models. Enable or disable per provider. Developers get gateway keys — nobody ever sees the real API keys. Anything outside the allowlist is blocked at the proxy.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Social proof / numbers -->
-<section style="padding:5.5rem 2rem;background:var(--bg-surface)">
+<!-- How to set it up (3 steps) -->
+<section style="padding:5.5rem 2rem;background:var(--bg-surface)" id="providers">
     <div class="container">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;text-align:center">
-            <div class="fade-in">
-                <div style="font-size:2.5rem;font-weight:800;color:var(--cyan);margin-bottom:0.25rem">94%</div>
-                <div style="font-size:0.9rem;color:var(--text-secondary)">cheaper — gpt-4o-mini vs gpt-4o at same token count</div>
+        <div class="section-label fade-in">// Setup</div>
+        <h2 class="section-title fade-in">Up and running in 3 steps</h2>
+        <p class="section-subtitle fade-in">No CA certificate. No code changes. Just a proxy and one env var.</p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem">
+
+            <!-- Step 1 -->
+            <div class="fade-in" style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:2rem">
+                <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem">
+                    <div style="width:2rem;height:2rem;background:linear-gradient(135deg,var(--cyan),var(--purple));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.78rem;font-weight:800;color:var(--bg-base);font-family:'SF Mono','Fira Code',monospace;box-shadow:0 0 14px rgba(0,212,255,0.4);flex-shrink:0">1</div>
+                    <h3 style="font-size:0.95rem;font-weight:700;color:var(--white)">Install and start</h3>
+                </div>
+                <div class="architecture-diagram" style="padding:1.1rem 1.25rem;font-size:0.78rem;line-height:1.85">
+                    <span style="color:#4a5568"># install</span><br>
+                    <span style="color:var(--cyan)">pip install</span> <span style="color:#a78bfa">airiskguard</span><br><br>
+                    <span style="color:#4a5568"># start the gateway on :8080</span><br>
+                    <span style="color:var(--cyan)">airiskguard-gateway</span> <span style="color:#a78bfa">start</span>
+                </div>
             </div>
-            <div class="fade-in">
-                <div style="font-size:2.5rem;font-weight:800;color:var(--cyan);margin-bottom:0.25rem">&lt;5 min</div>
-                <div style="font-size:0.9rem;color:var(--text-secondary)">install to first intercepted call</div>
+
+            <!-- Step 2 -->
+            <div class="fade-in" style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:2rem">
+                <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem">
+                    <div style="width:2rem;height:2rem;background:linear-gradient(135deg,var(--cyan),var(--purple));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.78rem;font-weight:800;color:var(--bg-base);font-family:'SF Mono','Fira Code',monospace;box-shadow:0 0 14px rgba(0,212,255,0.4);flex-shrink:0">2</div>
+                    <h3 style="font-size:0.95rem;font-weight:700;color:var(--white)">Point your tool at the gateway</h3>
+                </div>
+                <div class="architecture-diagram" style="padding:1.1rem 1.25rem;font-size:0.75rem;line-height:1.85;overflow-x:auto">
+                    <span style="color:#4a5568"># Claude Code / any Anthropic SDK tool</span><br>
+                    <span style="color:var(--cyan)">export</span> <span style="color:#a78bfa">ANTHROPIC_BASE_URL</span>=<span style="color:#4ade80">http://127.0.0.1:8080/anthropic</span><br>
+                    <span style="color:var(--cyan)">export</span> <span style="color:#a78bfa">ANTHROPIC_API_KEY</span>=<span style="color:#f59e0b">gw-your-key</span><br><br>
+                    <span style="color:#4a5568"># Cursor / Copilot / OpenAI SDK</span><br>
+                    <span style="color:var(--cyan)">export</span> <span style="color:#a78bfa">OPENAI_BASE_URL</span>=<span style="color:#4ade80">http://127.0.0.1:8080/openai</span><br>
+                    <span style="color:var(--cyan)">export</span> <span style="color:#a78bfa">OPENAI_API_KEY</span>=<span style="color:#f59e0b">gw-your-key</span>
+                </div>
             </div>
-            <div class="fade-in">
-                <div style="font-size:2.5rem;font-weight:800;color:var(--cyan);margin-bottom:0.25rem">1</div>
-                <div style="font-size:0.9rem;color:var(--text-secondary)">env var to point Claude Code at the gateway</div>
+
+            <!-- Step 3 -->
+            <div class="fade-in" style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:2rem">
+                <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem">
+                    <div style="width:2rem;height:2rem;background:linear-gradient(135deg,var(--cyan),var(--purple));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.78rem;font-weight:800;color:var(--bg-base);font-family:'SF Mono','Fira Code',monospace;box-shadow:0 0 14px rgba(0,212,255,0.4);flex-shrink:0">3</div>
+                    <h3 style="font-size:0.95rem;font-weight:700;color:var(--white)">Check key status</h3>
+                </div>
+                <div class="architecture-diagram" style="padding:1.1rem 1.25rem;font-size:0.75rem;line-height:1.85;overflow-x:auto">
+                    <span style="color:var(--cyan)">airiskguard-gateway</span> <span style="color:#a78bfa">keys</span><br><br>
+                    <span style="color:#4a5568">KEY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; USER&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; STATUS</span><br>
+                    <span style="color:var(--text-secondary)">gw-abc123&nbsp;&nbsp;&nbsp;  john@company.com&nbsp;&nbsp;&nbsp; </span><span style="color:#4ade80">active</span><br>
+                    <span style="color:var(--text-secondary)">gw-def456&nbsp;&nbsp;&nbsp;  jane@company.com&nbsp;&nbsp;&nbsp; </span><span style="color:#4ade80">active</span><br>
+                    <span style="color:var(--text-secondary)">gw-ghi789&nbsp;&nbsp;&nbsp;  bob@company.com&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color:#f87171">revoked</span>
+                </div>
             </div>
-            <div class="fade-in">
-                <div style="font-size:2.5rem;font-weight:800;color:var(--cyan);margin-bottom:0.25rem">20+</div>
-                <div style="font-size:0.9rem;color:var(--text-secondary)">AI models with built-in pricing data</div>
-            </div>
+
         </div>
     </div>
 </section>
@@ -1115,24 +1370,13 @@
                 <div style="font-size:3rem;font-weight:800;color:var(--white);line-height:1;margin-bottom:0.25rem">$0</div>
                 <div style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:1.75rem">MIT license · forever free</div>
                 <ul style="list-style:none;flex:1;margin-bottom:2rem">
-                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
-                        <span style="position:absolute;left:0;color:#4ade80">✓</span> API proxy (no CA cert needed)
-                    </li>
-                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
-                        <span style="position:absolute;left:0;color:#4ade80">✓</span> Smart routing rules
-                    </li>
-                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
-                        <span style="position:absolute;left:0;color:#4ade80">✓</span> PII, secrets + financial data detection
-                    </li>
-                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
-                        <span style="position:absolute;left:0;color:#4ade80">✓</span> Model allowlist
-                    </li>
-                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
-                        <span style="position:absolute;left:0;color:#4ade80">✓</span> Local audit log (JSONL)
-                    </li>
-                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
-                        <span style="position:absolute;left:0;color:#4ade80">✓</span> 10 built-in providers (Anthropic, OpenAI, DeepSeek, Moonshot, GLM…)
-                    </li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:#4ade80">✓</span> API proxy (no CA cert needed)</li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:#4ade80">✓</span> Smart routing rules</li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:#4ade80">✓</span> Secrets + PII + financial data detection</li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:#4ade80">✓</span> Model allowlist</li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:#4ade80">✓</span> Local audit log (JSONL)</li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:#4ade80">✓</span> 10 providers, 50+ models</li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:#4ade80">✓</span> airiskguard-gateway keys / logs / status</li>
                 </ul>
                 <a href="https://github.com/gobeyondfj-cmd/airiskguard-gateway" target="_blank"
                    style="display:block;text-align:center;padding:0.75rem;border-radius:8px;font-weight:700;font-size:0.9rem;text-decoration:none;border:1px solid rgba(0,212,255,0.3);color:var(--cyan);transition:all 0.2s"
@@ -1149,24 +1393,14 @@
                 <div style="font-size:3rem;font-weight:800;color:var(--white);line-height:1;margin-bottom:0.25rem">$299</div>
                 <div style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:1.75rem">per month · cancel anytime</div>
                 <ul style="list-style:none;flex:1;margin-bottom:2rem">
-                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
-                        <span style="position:absolute;left:0;color:#4ade80">✓</span> Everything in Free
-                    </li>
-                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
-                        <span style="position:absolute;left:0;color:#4ade80">✓</span> Cost dashboard (spend by model)
-                    </li>
-                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
-                        <span style="position:absolute;left:0;color:#4ade80">✓</span> Centralized policy server
-                    </li>
-                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
-                        <span style="position:absolute;left:0;color:#4ade80">✓</span> Slack alerts on violations
-                    </li>
-                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
-                        <span style="position:absolute;left:0;color:#4ade80">✓</span> Per-team policies
-                    </li>
-                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative">
-                        <span style="position:absolute;left:0;color:#4ade80">✓</span> 30-day audit log retention
-                    </li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:#4ade80">✓</span> Everything in Free</li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:#4ade80">✓</span> Web dashboard (Overview / Analytics / Users / Providers)</li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:#4ade80">✓</span> Cost limits per provider + overall</li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:#4ade80">✓</span> Per-developer gateway keys + identity tracking</li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:#4ade80">✓</span> Slack alerts on violations</li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:#4ade80">✓</span> 30-day audit retention</li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:#4ade80">✓</span> Policy server (push policies to all machines)</li>
+                    <li style="padding:0.4rem 0;font-size:0.9rem;color:var(--text-primary);padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:#4ade80">✓</span> Admin login protection</li>
                 </ul>
                 <button id="checkout-btn"
                     onclick="startCheckout()"
@@ -1183,8 +1417,8 @@
 
 <!-- Final CTA -->
 <section class="final-cta">
-    <h2 class="fade-in">Stop flying blind on AI costs.</h2>
-    <p class="fade-in">Install the free proxy today. Add the dashboard when you're ready to see where the money goes.</p>
+    <h2 class="fade-in">Start cutting your AI bill today.</h2>
+    <p class="fade-in">Free to install. $299/mo when you need the dashboard.</p>
     <div class="hero-cta-group fade-in">
         <a href="https://github.com/gobeyondfj-cmd/airiskguard-gateway" target="_blank" class="hero-cta">Install Free</a>
         <a href="mailto:sales@airiskguard.ai?subject=Demo Request" class="hero-cta-ghost">Book a Demo</a>
